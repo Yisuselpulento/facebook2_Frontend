@@ -4,7 +4,7 @@ import { Nav } from '../components/Nav'
 
 const Layout = () => {
   return (
-    <div className='bg-gray-100'>
+    <div className='bg-primary'>
       <header>
         <Nav />
       </header>

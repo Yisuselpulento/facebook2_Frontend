@@ -3,6 +3,7 @@ import { Footer } from '../components/Footer'
 import { Navigate, Outlet } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import { Nav } from '../components/Nav'
+import { Aside } from '../components/Aside'
 
 export const LayoutAuth = () => {
   const { auth, cargando } = useAuth()
@@ -13,17 +14,22 @@ export const LayoutAuth = () => {
     <div>
       {auth._id
         ? (
-          <div className=' flex flex-col'>
+          <div className=' flex flex-col gap-14'>
             <header>
               <Nav />
             </header>
-            <main className=' flex'>
-              <aside className='bg-gray-100 p-4  min-h-[750px]'>
-                <h2 className='text-lg'>{auth.nombre}</h2>
-                aside
-              </aside>
-              <section className='p-4'>
+            <main className=' md:flex justify-center gap-12 min-h-[800px]'>
+              <Aside />
+              <section className='w-[650px]'>
                 <Outlet />
+              </section>
+              <section className='flex flex-col gap-7'>
+                <h2 className='bg-primary w-[300px] h-[300px] rounded'>
+                  fff
+                </h2>
+                <h2 className='bg-primary w-[300px] h-[300px] rounded'>
+                  fff
+                </h2>
               </section>
 
             </main>
