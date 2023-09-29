@@ -4,11 +4,11 @@ import { Nav } from '../components/Nav'
 
 const Layout = () => {
   return (
-    <div className='bg-primary'>
+    <div className='bg-secundary'>
       <header>
         <Nav />
       </header>
-      <main className='flex flex-col container max-w-[600px] mx-auto min-h-[750px] justify-center'>
+      <main className='flex flex-col container max-w-[600px] mx-auto min-h-[750px] justify-center p-4'>
         <Outlet />
       </main>
       <footer>

@@ -18,7 +18,7 @@ export const Home = () => {
 
         </div>
         <div className='flex justify-end'>
-          <button className='text-font1 font-bold bg-sky-400 py-3 px-5 rounded-full'>POST</button>
+          <button className='text-font1 font-bold bg-blue-700 py-3 px-5 rounded-full'>POST</button>
         </div>
 
       </div>
