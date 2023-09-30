@@ -10,7 +10,7 @@ export default {
         primary: '#18181b',
         secundary: '#0c0a09',
         font1: '#e2e8f0',
-        font2: '#94a3b8'
+        font2: '#6b7280'
       }
     }
   },

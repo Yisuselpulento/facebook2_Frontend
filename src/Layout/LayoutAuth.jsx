@@ -2,7 +2,7 @@ import React from 'react'
 import { Footer } from '../components/Footer'
 import { Navigate, Outlet } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
-import { Nav } from '../components/Nav'
+import { NavAuth } from '../components/NavAuth'
 import { Aside } from '../components/Aside'
 
 export const LayoutAuth = () => {
@@ -16,7 +16,7 @@ export const LayoutAuth = () => {
         ? (
           <div className=' flex flex-col gap-14'>
             <header>
-              <Nav />
+              <NavAuth />
             </header>
             <main className=' md:flex justify-center gap-12 min-h-[800px] p-4'>
               <Aside />

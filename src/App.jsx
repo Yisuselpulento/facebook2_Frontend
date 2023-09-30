@@ -8,6 +8,7 @@ import { Registrarse } from './pages/Registrarse'
 import NuevoPassword from './pages/NuevoPassword'
 import ConfirmarCuenta from './pages/ConfirmarCuenta'
 import { AuthProvider } from './context/AuthProvider'
+import { Perfil } from './pages/Perfil'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
 
           <Route path='/home' element={<LayoutAuth />}>
             <Route index element={<Home />} />
+            <Route path='perfil/:id' element={<Perfil />} />
           </Route>
         </Routes>
       </AuthProvider>

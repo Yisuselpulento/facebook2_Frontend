@@ -1,7 +1,8 @@
 import useAuth from '../hooks/useAuth'
+import { Config } from '../assets/icons/iconos'
 
 export const Aside = () => {
-  const { auth, cargando } = useAuth()
+  const { auth } = useAuth()
 
   return (
     <aside className='bg-primary p-4  h-[400px] rounded w-[300px] md:flex hidden flex-col gap-5'>
@@ -12,7 +13,9 @@ export const Aside = () => {
           </div>
           <h2 className='text-lg text-font1'>{auth.nombre}</h2>
         </div>
-        <p>IC</p>
+        <button className='bg-blue-700 py-1 px-3 rounded-full text-font1'>
+          Ver Perfil
+        </button>
       </div>
       <div>
         2
@@ -21,7 +24,9 @@ export const Aside = () => {
         3
       </div>
       <div>
-        4
+        <button>
+          <Config color='white' />
+        </button>
       </div>
     </aside>
   )

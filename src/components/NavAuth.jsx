@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Sun, Moon, Question } from '../assets/icons/iconos'
 import { useState } from 'react'
 
-export const Nav = () => {
+export const NavAuth = () => {
   const [ModeNocturne, setModeNocturne] = useState(true)
 
   const handleChangeMode = () => {
@@ -12,7 +12,7 @@ export const Nav = () => {
   return (
     <div className='bg-primary shadow h-[70px] flex justify-between items-center p-5 '>
       <Link
-        to='/'
+        to='/home'
         className='text-3xl font-bold text-blue-500'
       >Facebook2
 

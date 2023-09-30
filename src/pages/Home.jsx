@@ -1,4 +1,5 @@
 import useAuth from '../hooks/useAuth'
+import { Img } from '../assets/icons/iconos'
 
 export const Home = () => {
   const { setAuth } = useAuth()
@@ -17,7 +18,11 @@ export const Home = () => {
           <input type='text' placeholder='Write here...' className='bg-neutral-800 rounded-full h-[55px] w-full p-5 text-font1' />
 
         </div>
-        <div className='flex justify-end'>
+        <div className='flex justify-between items-center'>
+          <button>
+            <Img color='white' />
+          </button>
+
           <button className='text-font1 font-bold bg-blue-700 py-3 px-5 rounded-full'>POST</button>
         </div>
 
