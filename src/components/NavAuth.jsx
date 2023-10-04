@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Sun, Moon, Question } from '../assets/icons/iconos'
 import { useState } from 'react'
+import SearchComponent from './SearchComponent'
 
 export const NavAuth = () => {
   const [ModeNocturne, setModeNocturne] = useState(true)
@@ -17,6 +18,7 @@ export const NavAuth = () => {
       >Facebook2
 
       </Link>
+      <SearchComponent />
       <div className='flex gap-5'>
         <button onClick={handleChangeMode}>
           {ModeNocturne ? <Sun color='white' /> : <Moon color='white' />}

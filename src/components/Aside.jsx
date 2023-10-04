@@ -1,5 +1,6 @@
 import useAuth from '../hooks/useAuth'
 import { Config } from '../assets/icons/iconos'
+import { Link } from 'react-router-dom'
 
 export const Aside = () => {
   const { auth } = useAuth()
@@ -13,9 +14,11 @@ export const Aside = () => {
           </div>
           <h2 className='text-lg text-font1'>{auth.nombre}</h2>
         </div>
-        <button className='bg-blue-700 py-1 px-3 rounded-full text-font1'>
+        <Link
+          className='bg-blue-700 py-1 px-3 rounded-full text-font1 hover:bg-blue-800'
+        >
           Ver Perfil
-        </button>
+        </Link>
       </div>
       <div>
         2

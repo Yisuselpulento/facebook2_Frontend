@@ -1,7 +1,10 @@
 import React from 'react'
+import { NavAuth } from '../components/NavAuth'
 
 export const Perfil = () => {
   return (
-    <div>Perfil</div>
+    <div>
+      hola
+    </div>
   )
 }

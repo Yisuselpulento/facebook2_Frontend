@@ -9,26 +9,33 @@ import NuevoPassword from './pages/NuevoPassword'
 import ConfirmarCuenta from './pages/ConfirmarCuenta'
 import { AuthProvider } from './context/AuthProvider'
 import { Perfil } from './pages/Perfil'
+import { PostProvider } from './context/PostProvider'
+import { NotFound } from './pages/NotFound'
 
 const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <PostProvider>
+          <Routes>
+            <Route path='/' element={<Layout />}>
+              <Route index element={<Login />} />
+              <Route path='/registrarse' element={<Registrarse />} />
+              <Route path='/olvide-password' element={<OlvidePassword />} />
+              <Route path='/olvide-password/:token' element={<NuevoPassword />} />
+              <Route path='/confirmar/:id' element={<ConfirmarCuenta />} />
+              <Route path='*' element={<NotFound />} />
+            </Route>
 
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Login />} />
-            <Route path='/registrarse' element={<Registrarse />} />
-            <Route path='/olvide-password' element={<OlvidePassword />} />
-            <Route path='/olvide-password/:token' element={<NuevoPassword />} />
-            <Route path='/confirmar/:id' element={<ConfirmarCuenta />} />
-          </Route>
+            <Route path='/home' element={<LayoutAuth />}>
+              <Route index element={<Home />} />
+            </Route>
 
-          <Route path='/home' element={<LayoutAuth />}>
-            <Route index element={<Home />} />
-            <Route path='perfil/:id' element={<Perfil />} />
-          </Route>
-        </Routes>
+            <Route path='/perfil' element={<LayoutAuth />}>
+              <Route index element={<Perfil />} />
+            </Route>
+          </Routes>
+        </PostProvider>
       </AuthProvider>
     </BrowserRouter>
   )
