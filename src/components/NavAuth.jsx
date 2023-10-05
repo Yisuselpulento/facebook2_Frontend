@@ -1,13 +1,22 @@
 import { Link } from 'react-router-dom'
-import { Sun, Moon, Question } from '../assets/icons/iconos'
+import { Sun, Moon, Question, SessionOut } from '../assets/icons/iconos'
 import { useState } from 'react'
 import SearchComponent from './SearchComponent'
+import useAuth from '../hooks/useAuth'
+import { buttons } from '../helpers/TailwindVar'
 
 export const NavAuth = () => {
   const [ModeNocturne, setModeNocturne] = useState(true)
 
   const handleChangeMode = () => {
     setModeNocturne(!ModeNocturne)
+  }
+
+  const { setAuth } = useAuth()
+
+  const handleSesionClose = () => {
+    setAuth({})
+    localStorage.removeItem('token')
   }
 
   return (
@@ -25,6 +34,12 @@ export const NavAuth = () => {
         </button>
         <button>
           <Question color='white' />
+        </button>
+        <button
+          onClick={handleSesionClose}
+          className={`px-4 rounded py-2 font-bold flex gap-2 ${buttons}`}
+        >Out
+          <SessionOut color='white' />
         </button>
       </div>
 

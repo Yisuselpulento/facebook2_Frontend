@@ -1,6 +1,7 @@
 import useAuth from '../hooks/useAuth'
 import { Config } from '../assets/icons/iconos'
 import { Link } from 'react-router-dom'
+import { buttons } from '../helpers/TailwindVar'
 
 export const Aside = () => {
   const { auth } = useAuth()
@@ -12,10 +13,10 @@ export const Aside = () => {
           <div className='bg-gray-300 rounded-full h-[60px] w-[60px]'>
             im
           </div>
-          <h2 className='text-lg text-font1'>{auth.nombre}</h2>
+          <h2 className='text-lg text-font1 font-bold'>{auth.nombre}</h2>
         </div>
         <Link
-          className='bg-blue-700 py-1 px-3 rounded-full text-font1 hover:bg-blue-800'
+          className={`${buttons} bg-blue-700 py-1 px-3 rounded-full text-font1 hover:bg-blue-800`}
         >
           Ver Perfil
         </Link>

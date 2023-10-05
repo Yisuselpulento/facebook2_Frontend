@@ -5,6 +5,7 @@ import useAuth from '../hooks/useAuth'
 import { NavAuth } from '../components/NavAuth'
 import { Aside } from '../components/Aside'
 import IMG from '../assets/img/promocion.webp'
+import Recomendaciones from '../components/Recomendaciones'
 
 export const LayoutAuth = () => {
   const { auth, cargando } = useAuth()
@@ -24,7 +25,7 @@ export const LayoutAuth = () => {
               <section className='md:w-[650px]'>
                 <Outlet />
               </section>
-              <section className='flex flex-col gap-7'>
+              <section className='flex md:flex-col gap-7 '>
                 <div className='bg-primary w-[300px] rounded p-4 flex flex-col gap-2 '>
                   <div className='flex justify-between'>
                     <p className='text-font1'>Lorem ipsum</p>
@@ -40,8 +41,8 @@ export const LayoutAuth = () => {
                   </div>
                   <p className='text-font2'>Lorem ipsum dolor sit amet consectetur adipisicing  </p>
                 </div>
-                <div className='bg-primary w-[300px] h-[300px] rounded'>
-                  fff
+                <div className='bg-primary rounded p-3'>
+                  <Recomendaciones />
                 </div>
               </section>
 

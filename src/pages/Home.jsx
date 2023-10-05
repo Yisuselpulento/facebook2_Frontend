@@ -4,17 +4,12 @@ import usePosts from '../hooks/usePosts'
 import { PostsHome } from '../components/PostsHome'
 import { useState } from 'react'
 import Modal from '../components/Modal'
+import { buttons } from '../helpers/TailwindVar'
 
 export const Home = () => {
   const [inputPost, setInputPost] = useState('')
 
   const { Postear, globalPost, cargando } = usePosts()
-  const { setAuth } = useAuth()
-
-  const handleSesionClose = () => {
-    setAuth({})
-    localStorage.removeItem('token')
-  }
 
   const handleNewPost = async () => {
     if (inputPost === '') return
@@ -44,7 +39,7 @@ export const Home = () => {
 
           <button
             onClick={handleNewPost}
-            className='text-font1 font-bold bg-blue-700 hover:bg-blue-800 py-3 px-5 rounded-full'
+            className={`${buttons}font-bold py-3 px-5 rounded-full`}
           >POST
           </button>
         </div>
@@ -59,12 +54,6 @@ export const Home = () => {
         ))
 
         : <p className='text-font1'>Cargando...</p>}
-
-      <button
-        onClick={handleSesionClose}
-        className='p-20 bg-black text-white hover:bg-green-500 hover:text-pink-400 text-5xl'
-      >CERRAR SESION
-      </button>
 
     </div>
   )

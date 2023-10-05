@@ -1,3 +1,5 @@
+import { buttons } from '../helpers/TailwindVar'
+
 export default function SearchComponent () {
   return (
     <div className='flex items-center'>
@@ -7,7 +9,7 @@ export default function SearchComponent () {
           className='block w-[400px] px-4 py-2 text-primary bg-white border rounded-full focus:border-blue-700 focus:ring-blue-700 focus:outline-none focus:ring focus:ring-opacity-40 '
           placeholder='Search...'
         />
-        <button className='px-4 text-white bg-blue-700 rounded-full hover:bg-blue-800'>
+        <button className={`px-4 rounded-full  ${buttons} `}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='w-5 h-5'
