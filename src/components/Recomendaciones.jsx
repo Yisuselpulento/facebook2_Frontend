@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import clienteAxios from '../config/clienteAxios'
 import { CardUsers } from './CardUsers'
+import useAuth from '../hooks/useAuth'
+
 const Recomendaciones = () => {
+  const { auth } = useAuth()
   const [users, setUsers] = useState([])
   const [cargando, setCargando] = useState(true)
 
@@ -18,8 +21,9 @@ const Recomendaciones = () => {
         }
 
         const { data } = await clienteAxios('usuarios', config)
-
-        setUsers(data)
+        // pasar esto a servidor para filtrar  al usuario en recomendacion
+        const newArr = data.filter(user => user._id !== auth._id)
+        setUsers(newArr)
         setCargando(false)
       } catch (error) {
         console.log(error)

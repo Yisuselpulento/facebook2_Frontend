@@ -93,7 +93,7 @@ export const PostsHome = ({ post }) => {
           />
           <button
             onClick={() => handlePostComment(post._id)}
-            className={`${buttons}rounded py-3 px-4 `}
+            className={`${buttons}rounded py-3 px-4 mt-2 `}
           >Enviar
           </button>
         </div>

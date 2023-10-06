@@ -23,12 +23,12 @@ export const NavAuth = () => {
     <div className='bg-primary shadow h-[70px] flex justify-between items-center p-5 '>
       <Link
         to='/home'
-        className='text-3xl font-bold text-blue-500'
+        className='text-3xl font-bold text-blue-500 md:flex hidden'
       >Facebook2
 
       </Link>
       <SearchComponent />
-      <div className='flex gap-5'>
+      <div className='hidden md:flex gap-5'>
         <button onClick={handleChangeMode}>
           {ModeNocturne ? <Sun color='white' /> : <Moon color='white' />}
         </button>

@@ -2,12 +2,16 @@ import useAuth from '../hooks/useAuth'
 import { Config } from '../assets/icons/iconos'
 import { Link } from 'react-router-dom'
 import { buttons } from '../helpers/TailwindVar'
+import { ModalEdit } from './ModalComponent'
+import { useState } from 'react'
 
 export const Aside = () => {
+  const [modal, setModal] = useState(false)
   const { auth } = useAuth()
 
   return (
     <aside className='bg-primary p-4  h-[400px] rounded w-[300px] md:flex hidden flex-col gap-5'>
+      {modal && <ModalEdit />}
       <div className='flex justify-between items-center'>
         <div className='flex gap-3 items-center'>
           <div className='bg-gray-300 rounded-full h-[60px] w-[60px]'>
@@ -29,7 +33,7 @@ export const Aside = () => {
         3
       </div>
       <div>
-        <button>
+        <button onClick={() => setModal(!modal)}>
           <Config color='white' />
         </button>
       </div>
