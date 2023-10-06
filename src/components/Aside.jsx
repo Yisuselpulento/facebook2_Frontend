@@ -17,6 +17,7 @@ export const Aside = () => {
         </div>
         <Link
           className={`${buttons} bg-blue-700 py-1 px-3 rounded-full text-font1 hover:bg-blue-800`}
+          to='/perfil'
         >
           Ver Perfil
         </Link>

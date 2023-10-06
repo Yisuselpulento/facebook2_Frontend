@@ -27,6 +27,23 @@ const PostProvider = ({ children }) => {
     }
   }
 
+  const deletePost = async (id) => {
+    try {
+      const token = localStorage.getItem('token')
+      if (!token) return
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      await clienteAxios.delete(`posts/${id}`, config)
+    } catch (error) {
+      console.log(error.response.data)
+    }
+  }
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -39,7 +56,7 @@ const PostProvider = ({ children }) => {
           }
         }
 
-        const { data } = await clienteAxios.get('posts', config)
+        const { data } = await clienteAxios('posts', config)
         setGlobalPost(data)
         setCargando(false)
       } catch (error) {
@@ -48,7 +65,7 @@ const PostProvider = ({ children }) => {
     }
 
     fetchPost()
-  }, [newPost])
+  }, [globalPost])
 
   return (
     <PostContext.Provider
@@ -57,7 +74,8 @@ const PostProvider = ({ children }) => {
         newPost,
         Postear,
         globalPost,
-        cargando
+        cargando,
+        deletePost
       }}
     >
       {children}
