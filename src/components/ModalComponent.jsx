@@ -106,13 +106,25 @@ const ModalChat = () => {
 
       const { data } = await clienteAxios.post('messages', { content: message }, config)
       socketInstance.emit('send_message', data)
-      setMessage('')
-
+      console.log(data)
       setChat(prevChat => [...prevChat, data])
+      setMessage('')
     } catch (error) {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    socketInstance.on('receive_message', data => {
+      setChat(prevChat => [...prevChat, data])
+    })
+
+    return () => {
+      socketInstance.off('receive_message', data => {
+        setChat(prevChat => [...prevChat, data])
+      })
+    }
+  }, [])
 
   const customStyles = {
     content: {
@@ -124,19 +136,6 @@ const ModalChat = () => {
       transform: 'translate(-50%, -50%)'
     }
   }
-
-  useEffect(() => {
-    socketInstance.on('receive_message', data => {
-      console.log(data)
-    })
-
-    return () => {
-      socketInstance.off('receive_message', data => {
-        console.log(data)
-      })
-    }
-    /* setChat(oldChat => [...oldChat, data]) */
-  }, [])
 
   Modal.setAppElement('#root')
   return (
