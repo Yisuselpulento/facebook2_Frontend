@@ -12,7 +12,6 @@ export const Home = () => {
 
   const handleActiveModal = () => {
     setChatActive(!chatActive)
-    console.log(chatActive)
   }
 
   return (

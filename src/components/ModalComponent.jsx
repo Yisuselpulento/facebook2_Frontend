@@ -6,7 +6,6 @@ import { ChatIcon, GroupIcon, SendMsj } from '../assets/icons/iconos'
 import io from 'socket.io-client'
 import { MsjComponent } from './MsjComponent'
 import clienteAxios from '../config/clienteAxios'
-import useAuth from '../hooks/useAuth'
 import { ButtonOpenModal } from './ButtonOpenModal'
 
 const ModalEdit = () => {
@@ -63,7 +62,7 @@ const ModalEdit = () => {
 
   ) */
 }
-
+const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
 // todo el componente
 const ModalChat = () => {
   const [modalIsOpen, setIsOpen] = useState(true)
@@ -71,12 +70,8 @@ const ModalChat = () => {
   // socket io
   const [message, setMessage] = useState('')
   const [chat, setChat] = useState([])
-  const { auth } = useAuth()
-  const [socket, setSocket] = useState(null)
-
   // socket
   useEffect(() => {
-    console.log(auth)
     const fetchMessages = async () => {
       try {
         const token = localStorage.getItem('token')
@@ -96,28 +91,10 @@ const ModalChat = () => {
     }
 
     fetchMessages()
-
-    // soket io
-    if (socket) {
-      return
-    }
-
-    const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
-    socketInstance.on('receive_message', data => {
-      setChat(oldChat => [...oldChat, data])
-    })
-    setSocket(socketInstance)
-    return () => socketInstance.disconnect()
   }, [])
 
   const sendMessage = async () => {
-    const userData = {
-      content: message,
-      user: auth._id,
-      name: auth.nombre
-    }
-
-    /*   try {
+    try {
       const token = localStorage.getItem('token')
       if (!token) return
       const config = {
@@ -127,14 +104,14 @@ const ModalChat = () => {
         }
       }
 
-      const { data } = await clienteAxios.post('messages', userData, config)
+      const { data } = await clienteAxios.post('messages', { content: message }, config)
+      socketInstance.emit('send_message', data)
+      setMessage('')
+
       setChat(prevChat => [...prevChat, data])
     } catch (error) {
       console.log(error)
-    } */
-
-    socket.emit('send_message', userData)
-    setMessage('')
+    }
   }
 
   const customStyles = {
@@ -147,6 +124,19 @@ const ModalChat = () => {
       transform: 'translate(-50%, -50%)'
     }
   }
+
+  useEffect(() => {
+    socketInstance.on('receive_message', data => {
+      console.log(data)
+    })
+
+    return () => {
+      socketInstance.off('receive_message', data => {
+        console.log(data)
+      })
+    }
+    /* setChat(oldChat => [...oldChat, data]) */
+  }, [])
 
   Modal.setAppElement('#root')
   return (
@@ -183,9 +173,9 @@ const ModalChat = () => {
 
         </div>
 
-        <buttons onClick={() => setIsOpen(false)}>
+        <button onClick={() => setIsOpen(false)}>
           <ButtonOpenModal />
-        </buttons>
+        </button>
 
       </div>
 
