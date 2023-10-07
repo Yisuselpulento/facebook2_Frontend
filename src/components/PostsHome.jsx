@@ -75,7 +75,7 @@ export const PostsHome = ({ post }) => {
               onClick={() => deletePost(post._id)}
               className='bg-red-400 py-1 px-3 rounded'
                               >Borrar
-            </button>}
+                              </button>}
           </div>
 
         </div>

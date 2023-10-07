@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { buttons } from '../helpers/TailwindVar'
 import { ChatIcon, GroupIcon, SendMsj } from '../assets/icons/iconos'
+// pasar a un componente todo lo de coket
+import io from 'socket.io-client'
+import { MsjComponent } from './MsjComponent'
+import clienteAxios from '../config/clienteAxios'
+import useAuth from '../hooks/useAuth'
+import { ButtonOpenModal } from './ButtonOpenModal'
 
 const ModalEdit = () => {
-  const [modalIsOpen, setIsOpen] = useState(true)
+  /* const [modalIsOpen, setIsOpen] = useState(true)
 
   const customStyles = {
     content: {
@@ -55,11 +61,81 @@ const ModalEdit = () => {
 
     </Modal>
 
-  )
+  ) */
 }
 
+// todo el componente
 const ModalChat = () => {
   const [modalIsOpen, setIsOpen] = useState(true)
+
+  // socket io
+  const [message, setMessage] = useState('')
+  const [chat, setChat] = useState([])
+  const { auth } = useAuth()
+  const [socket, setSocket] = useState(null)
+
+  // socket
+  useEffect(() => {
+    console.log(auth)
+    const fetchMessages = async () => {
+      try {
+        const token = localStorage.getItem('token')
+        if (!token) return
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        }
+
+        const { data } = await clienteAxios('messages', config)
+        setChat(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchMessages()
+
+    // soket io
+    if (socket) {
+      return
+    }
+
+    const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
+    socketInstance.on('receive_message', data => {
+      setChat(oldChat => [...oldChat, data])
+    })
+    setSocket(socketInstance)
+    return () => socketInstance.disconnect()
+  }, [])
+
+  const sendMessage = async () => {
+    const userData = {
+      content: message,
+      user: auth._id,
+      name: auth.nombre
+    }
+
+    /*   try {
+      const token = localStorage.getItem('token')
+      if (!token) return
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      const { data } = await clienteAxios.post('messages', userData, config)
+      setChat(prevChat => [...prevChat, data])
+    } catch (error) {
+      console.log(error)
+    } */
+
+    socket.emit('send_message', userData)
+    setMessage('')
+  }
 
   const customStyles = {
     content: {
@@ -84,15 +160,22 @@ const ModalChat = () => {
           <GroupIcon color='white' />
         </button>
         <div className='flex flex-col gap-3'>
-          <div className='h-[400px] bg-gray-100 p-3 '>
-            <p>mensaje </p>
+          <div className='h-[400px] bg-gray-100 p-3 flex flex-col gap-2 overflow-auto'>
+            {chat.map((msg, index) => (
+              <MsjComponent msg={msg} key={index} />
+            ))}
           </div>
 
           <div className='flex bg-gray-300 p-1 rounded-full gap-2 w-full'>
-            <buttons className='bg-blue-700 rounded-full p-2'>
+            <button
+              onClick={sendMessage}
+              className='bg-blue-700 rounded-full p-2'
+            >
               <SendMsj color='white' />
-            </buttons>
+            </button>
             <input
+              value={message}
+              onChange={e => setMessage(e.target.value)}
               placeholder='Mensaje'
               className='rounded-lg p-2 w-[250px]'
             />
@@ -100,11 +183,9 @@ const ModalChat = () => {
 
         </div>
 
-        <button
-          onClick={() => { setIsOpen(!modalIsOpen) }}
-          className='bg-blue-700 rounded-full p-2 fixed right-1 bottom-1'
-        ><ChatIcon color='gray' />
-        </button>
+        <buttons onClick={() => setIsOpen(false)}>
+          <ButtonOpenModal />
+        </buttons>
 
       </div>
 
