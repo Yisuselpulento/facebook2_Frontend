@@ -26,6 +26,7 @@ export const Home = () => {
       >
         <ChatIcon color='white' />
       </button>
+      {chatActive && <ChatComponent />}
 
     </div>
   )
