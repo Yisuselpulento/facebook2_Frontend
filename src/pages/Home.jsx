@@ -1,9 +1,21 @@
-import usePosts from '../hooks/usePosts'
 import { PostsHome } from '../components/PostsHome'
 import HeadInputPost from '../components/HeadInputPost'
+import { useState, useEffect } from 'react'
+import { fetchPost } from '../services/postsFetch'
 
 export const Home = () => {
-  const { globalPost, cargando } = usePosts()
+  const [globalPost, setGlobalPost] = useState()
+  const [cargando, setCargando] = useState(true)
+
+  useEffect(() => {
+    const getPost = async () => {
+      const data = await fetchPost()
+      setGlobalPost(data)
+      setCargando(false)
+    }
+
+    getPost()
+  }, [])
 
   return (
     <div className='static'>

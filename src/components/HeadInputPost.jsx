@@ -1,25 +1,27 @@
-import usePosts from '../hooks/usePosts'
 import { useState } from 'react'
 import { buttons } from '../helpers/TailwindVar'
 import { Img } from '../assets/icons/iconos'
+import useAuth from '../hooks/useAuth'
+import { Postear } from '../services/postsFetch'
 
 const HeadInputPost = () => {
   const [inputPost, setInputPost] = useState('')
+  const { auth } = useAuth()
 
-  const { Postear } = usePosts()
-
-  const handleNewPost = async () => {
+  const handleNewPost = () => {
     if (inputPost === '') return
-
-    await Postear(inputPost)
+    Postear(inputPost)
     setInputPost('')
   }
 
   return (
     <div className='bg-primary rounded h-[150px] mb-10  p-4 justify-center flex flex-col gap-5'>
-      <div className='flex gap-5'>
-        <div className='h-[55px] w-[55px] bg-gray-300 rounded-full '>
-          FJH
+      <div className='flex gap-5 items-center'>
+        <div>
+          <img
+            className='w-16 h-16 rounded-full object-cover border border-gray-700'
+            src={`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/avatar/${auth.image}`}
+          />
         </div>
         <input
           type='text' placeholder='Write here...' className='bg-neutral-800 rounded-full h-[55px] w-full p-5 text-font1'

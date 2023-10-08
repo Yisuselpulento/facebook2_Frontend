@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { NavAuth } from '../components/NavAuth'
 import useAuth from '../hooks/useAuth'
-import clienteAxios from '../config/clienteAxios'
 import { PostsHome } from '../components/PostsHome'
 import HeadInputPost from '../components/HeadInputPost'
+import { fetchPostUser } from '../services/postsFetch'
 
 export const Perfil = () => {
   const { auth } = useAuth()
@@ -11,26 +10,13 @@ export const Perfil = () => {
   const [cargando, setcargando] = useState(true)
 
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const token = localStorage.getItem('token')
-        if (!token) return
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-        const { data } = await clienteAxios(`posts/${auth._id}`, config)
-        setpostUser(data)
-        setcargando(false)
-      } catch (error) {
-        console.log(error)
-      }
+    const PostPerfil = async () => {
+      const data = await fetchPostUser(auth._id)
+      setpostUser(data)
+      setcargando(false)
     }
 
-    fetchPost()
+    PostPerfil()
   }, [postUser])
 
   return (

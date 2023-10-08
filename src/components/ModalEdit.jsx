@@ -1,12 +1,14 @@
 import { buttons } from '../helpers/TailwindVar'
 import useAuth from '../hooks/useAuth'
 import { useState } from 'react'
-import clienteAxios from '../config/clienteAxios'
+import { Link } from 'react-router-dom'
+import { editPerfilFetch, changeImage } from '../services/perfilFetch.js'
 
 const ModalEdit = () => {
   const { modalEdit, setModalEdit, auth } = useAuth()
+  const [selectedFile, setSelectedFile] = useState(null)
   const [formData, setFormData] = useState({
-    sexo: '', // Puedes establecer un valor inicial si lo deseas, por ejemplo: 'male'
+    sexo: '',
     age: '',
     country: ''
   })
@@ -19,35 +21,44 @@ const ModalEdit = () => {
     }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-
-    try {
-      const token = localStorage.getItem('token')
-      if (!token) return
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }
-
-      await clienteAxios.put(`usuarios/editar-perfil/${auth._id}`, formData, config)
-    } catch (error) {
-      console.log(error)
-    }
+    editPerfilFetch(auth._id, formData)
   }
 
+  const handleFileChange = (e) => {
+    console.log('cambiando png')
+    setSelectedFile(e.target.files[0])
+  }
+
+  const handleSubmitImg = async (e) => {
+    e.preventDefault()
+
+    if (selectedFile) {
+      const formData = new FormData()
+      formData.append('file0', selectedFile)
+      console.log([...formData.entries()])
+      changeImage(formData)
+    } else {
+      console.log('No hay un archivo seleccionado.')
+    }
+  }
   return (
 
     <div>
       <div className='flex flex-col items-center'>
         <div className='flex flex-col gap-2 items-center'>
           <div className='border border-blue-500 rounded-full w-[100px] h-[100px] text-center'>img</div>
-          <div className='flex flex-col gap-1'>
-            <p>Nick</p>
-            <a>Editar</a>
-          </div>
+          <form
+            onSubmit={handleSubmitImg}
+            className='flex flex-col gap-1'
+          >
+            <label>
+              Sube una imagen:
+              <input type='file' name='file0' accept='image/*' onChange={handleFileChange} />
+            </label>
+            <button type='submit'>Cambiar Avatar</button>
+          </form>
 
         </div>
         <form onSubmit={handleSubmit}>
@@ -87,11 +98,12 @@ const ModalEdit = () => {
           >Guardar cambios
           </button>
         </form>
-        <button
+        <Link
+          to='/home'
           onClick={() => setModalEdit(!modalEdit)}
           className={`px-3 py-2 rounded ${buttons} `}
         >Guardar
-        </button>
+        </Link>
 
       </div>
 

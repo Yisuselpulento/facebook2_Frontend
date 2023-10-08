@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import useAuth from '../hooks/useAuth'
-import clienteAxios from '../config/clienteAxios'
+import { handleDeleteComment } from '../services/commentsFetch'
 
 const CardComments = ({ comment }) => {
   const [buttonDeleted, setbuttonDeleted] = useState(false)
@@ -11,32 +11,20 @@ const CardComments = ({ comment }) => {
     if (auth._id === comment.author._id) { setbuttonDeleted(true) }
   }, [])
 
-  const handleDeleteComment = async (id) => {
-    try {
-      const token = localStorage.getItem('token')
-      if (!token) return
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }
-
-      await clienteAxios.delete(`comments/${id}`, config)
-    } catch (error) {
-      console.log(error.response.data)
-    }
+  const deleteComment = () => {
+    handleDeleteComment(comment._id)
   }
 
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex justify-between'>
         <p className='text-font2 font-bold'>{comment.author.nombre}</p>
-        {buttonDeleted && <button
-          onClick={() => handleDeleteComment(comment._id)}
-          className='bg-red-400 px-2 py-1 font-bold '
-                          >Borrar
-                          </button>}
+        {buttonDeleted &&
+          <button
+            onClick={deleteComment}
+            className='bg-red-400 px-2 py-1 font-bold '
+          >Borrar
+          </button>}
 
       </div>
 

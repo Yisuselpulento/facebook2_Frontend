@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { buttons } from '../helpers/TailwindVar'
-import useAuth from '../hooks/useAuth'
-import usePosts from '../hooks/usePosts'
-import clienteAxios from '../config/clienteAxios'
+import useAuth from '../hooks/useAuth/'
 import CardComments from './CardComments'
+import { fetchComments, handlePostComment } from '../services/commentsFetch'
+import { deletePost } from '../services/postsFetch'
 
 export const PostsHome = ({ post }) => {
-  const { deletePost } = usePosts()
   const { auth } = useAuth()
   const [buttonDelette, setButtonDelette] = useState(false)
-
   const [comments, setcomments] = useState([])
   const [cargando, setCargando] = useState(true)
   const [comentario, setcomentario] = useState('')
@@ -19,63 +17,44 @@ export const PostsHome = ({ post }) => {
   }, [])
 
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const token = localStorage.getItem('token')
-        if (!token) return
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-        const comentarios = await clienteAxios(`comments/${post._id}`, config)
-
-        setcomments(comentarios.data)
-        setCargando(false)
-      } catch (error) {
-        console.log(error.response.data)
-      }
+    const getPost = async () => {
+      const data = await fetchComments(post)
+      setcomments(data)
+      setCargando(false)
     }
+    getPost()
+  }, [])
 
-    fetchComments()
-  }, [comments])
-
-  const handlePostComment = async (id) => {
-    try {
-      const token = localStorage.getItem('token')
-      if (!token) return
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }
-
-      await clienteAxios.post(`comments/${post._id}`, { content: comentario }, config)
-      setcomentario('')
-    } catch (error) {
-      console.log(error.response.data)
-    }
+  const setPost = () => {
+    handlePostComment(post._id, comentario)
+    setcomentario('')
+  }
+  const handleDeletePost = () => {
+    deletePost(post._id)
   }
 
   return (
     <div>
       <div className='flex flex-col gap-5 text-font1'>
         <div className='flex gap-3 items-center'>
-          <div className='rounded-full bg-white h-10 w-10'>
-            img
+          <div>
+            <img
+              width={100}
+              height={100}
+              className='w-14 h-14 rounded-full object-cover border border-gray-700'
+              src={`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/avatar/${post.image}`}
+            />
           </div>
           <div className='flex justify-between w-full'>
             <button className='font-bold'>
               {post.NameAuthor}
             </button>
-            {buttonDelette && <button
-              onClick={() => deletePost(post._id)}
-              className='bg-red-400 py-1 px-3 rounded'
-                              >Borrar
-                              </button>}
+            {buttonDelette &&
+              <button
+                onClick={handleDeletePost}
+                className='bg-red-400 py-1 px-3 rounded'
+              >Borrar
+              </button>}
           </div>
 
         </div>
@@ -92,7 +71,7 @@ export const PostsHome = ({ post }) => {
             value={comentario}
           />
           <button
-            onClick={() => handlePostComment(post._id)}
+            onClick={setPost}
             className={`${buttons}rounded py-3 px-4 mt-2 `}
           >Enviar
           </button>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import clienteAxios from '../config/clienteAxios'
+
 import { CardUsers } from './CardUsers'
 import useAuth from '../hooks/useAuth'
+import { fetchUsers } from '../services/userFetch'
 
 const Recomendaciones = () => {
   const { auth } = useAuth()
@@ -9,28 +10,13 @@ const Recomendaciones = () => {
   const [cargando, setCargando] = useState(true)
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const token = localStorage.getItem('token')
-        if (!token) return
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-        const { data } = await clienteAxios('usuarios', config)
-        // pasar esto a servidor para filtrar  al usuario en recomendacion
-        const newArr = data.filter(user => user._id !== auth._id)
-        setUsers(newArr)
-        setCargando(false)
-      } catch (error) {
-        console.log(error)
-      }
+    const showUsers = async () => {
+      const data = await fetchUsers(auth)
+      setUsers(data)
+      setCargando(false)
     }
 
-    fetchUsers()
+    showUsers()
   }, [])
 
   return (
