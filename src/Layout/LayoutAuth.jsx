@@ -6,11 +6,27 @@ import { NavAuth } from '../components/NavAuth'
 import { Aside } from '../components/Aside'
 import IMG from '../assets/img/promocion.webp'
 import Recomendaciones from '../components/Recomendaciones'
+import Modal from 'react-modal'
+import { ChatIcon } from '../assets/icons/iconos'
+import { ChatGroup } from '../components/ChatGroup'
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+}
+
+Modal.setAppElement('#root')
 
 export const LayoutAuth = () => {
-  const { auth, cargando } = useAuth()
-  if (cargando) return 'Cargando...'
+  const { auth, cargando, modal, setModal } = useAuth()
 
+  if (cargando) return 'Cargando...'
   return (
 
     <div>
@@ -46,14 +62,30 @@ export const LayoutAuth = () => {
                 </div>
               </section>
 
+              <button
+                onClick={() => setModal(!modal)}
+                className='bg-blue-700 rounded-full p-3 md:p-4 fixed bottom-4 right-4'
+              >
+                <ChatIcon color='white' />
+              </button>
+
             </main>
             <footer className='shadow-t-lg'>
               <Footer />
             </footer>
-
+            {/*  */}
           </div>
           )
         : <Navigate to='/' />}
+
+      {modal &&
+        <Modal
+          customStyles={customStyles}
+          isOpen={modal}
+        >
+          <ChatGroup />
+        </Modal>}
+
     </div>
   )
 }

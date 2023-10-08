@@ -1,72 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import Modal from 'react-modal'
-import { buttons } from '../helpers/TailwindVar'
-import { ChatIcon, GroupIcon, SendMsj } from '../assets/icons/iconos'
-// pasar a un componente todo lo de coket
+import { useEffect, useState } from 'react'
+import { GroupIcon, SendMsj, ChatIcon } from '../assets/icons/iconos'
 import io from 'socket.io-client'
 import { MsjComponent } from './MsjComponent'
 import clienteAxios from '../config/clienteAxios'
-import { ButtonOpenModal } from './ButtonOpenModal'
+import useAuth from '../hooks/useAuth'
 
-const ModalEdit = () => {
-  /* const [modalIsOpen, setIsOpen] = useState(true)
-
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)'
-    }
-  }
-
-  Modal.setAppElement('#root')
-  return (
-
-    <Modal
-      isOpen={modalIsOpen}
-      style={customStyles}
-    >
-      <div className='flex flex-col items-center'>
-        <div className='flex flex-col gap-2 items-center'>
-          <div className='border border-blue-500 rounded-full w-[100px] h-[100px] text-center'>img</div>
-          <div className='flex flex-col gap-1'>
-            <p>Nick</p>
-            <a>Editar</a>
-          </div>
-
-        </div>
-        <div className='flex gap-20'>
-          <div className='flex flex-col gap-3'>
-            <p>Sexo:</p>
-            <p>Edad:</p>
-            <p>Pais:</p>
-          </div>
-          <div className='flex flex-col gap-3'>
-            <p>Superior</p>
-            <p>20</p>
-            <p>Chile</p>
-          </div>
-        </div>
-        <button
-          onClick={() => { setIsOpen(!modalIsOpen) }}
-          className={`px-3 py-2 rounded ${buttons} `}
-        >Guardar
-        </button>
-
-      </div>
-
-    </Modal>
-
-  ) */
-}
 const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
-// todo el componente
-const ModalChat = () => {
-  const [modalIsOpen, setIsOpen] = useState(true)
 
+const ChatGroup = () => {
+  const { modal, setModal } = useAuth()
   // socket io
   const [message, setMessage] = useState('')
   const [chat, setChat] = useState([])
@@ -126,24 +68,9 @@ const ModalChat = () => {
     }
   }, [])
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)'
-    }
-  }
-
-  Modal.setAppElement('#root')
   return (
 
-    <Modal
-      isOpen={modalIsOpen}
-      style={customStyles}
-    >
+    <div>
       <div className='w-[330px] h-[460px] flex flex-col justify-between static'>
         <button className='bg-blue-700 p-2 rounded-full fixed left-1 top-1'>
           <GroupIcon color='white' />
@@ -172,18 +99,19 @@ const ModalChat = () => {
 
         </div>
 
-        <button onClick={() => setIsOpen(false)}>
-          <ButtonOpenModal />
-        </button>
-
       </div>
+      <button
+        onClick={() => setModal(!modal)}
+        className='bg-blue-700 rounded-full p-3 md:p-4 fixed bottom-4 right-4'
+      >
+        <ChatIcon color='white' />
+      </button>
 
-    </Modal>
+    </div>
 
   )
 }
 
 export {
-  ModalEdit,
-  ModalChat
+  ChatGroup
 }

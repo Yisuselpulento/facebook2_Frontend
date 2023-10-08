@@ -1,18 +1,9 @@
 import usePosts from '../hooks/usePosts'
 import { PostsHome } from '../components/PostsHome'
 import HeadInputPost from '../components/HeadInputPost'
-import { ChatIcon } from '../assets/icons/iconos'
-import { useState } from 'react'
-import { ModalChat } from '../components/ModalComponent'
-import { ButtonOpenModal } from '../components/ButtonOpenModal'
 
 export const Home = () => {
   const { globalPost, cargando } = usePosts()
-  const [chatActive, setChatActive] = useState(false)
-
-  const handleActiveModal = () => {
-    setChatActive(!chatActive)
-  }
 
   return (
     <div className='static'>
@@ -25,8 +16,6 @@ export const Home = () => {
         ))
 
         : <p className='text-font1'>Cargando...</p>}
-      <ButtonOpenModal handleActiveModal={handleActiveModal} />
-      {chatActive && <ModalChat />}
 
     </div>
   )
