@@ -6,7 +6,7 @@ export default function SearchComponent () {
       <div className='flex gap-4'>
         <input
           type='text'
-          className='block w-[300px] md:w-[400px] px-4 py-2 text-primary bg-gray-200 dark:bg-white border rounded-full focus:border-blue-700 focus:ring-blue-700 focus:outline-none focus:ring focus:ring-opacity-40 '
+          className='block w-[230px] md:w-[400px] px-4 py-2 text-primary bg-gray-200 dark:bg-white border rounded-full focus:border-blue-700 focus:ring-blue-700 focus:outline-none focus:ring focus:ring-opacity-40 '
           placeholder='Search...'
         />
         <button className={`px-4 rounded-full  ${buttons} `}>

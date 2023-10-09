@@ -8,7 +8,7 @@ import { Registrarse } from './pages/Registrarse'
 import NuevoPassword from './pages/NuevoPassword'
 import ConfirmarCuenta from './pages/ConfirmarCuenta'
 import { AuthProvider } from './context/AuthProvider'
-import { Perfil } from './pages/Perfil'
+import { PerfilDinamic } from './pages/PerfilDinamic'
 import { NotFound } from './pages/NotFound'
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
 
           <Route path='/home' element={<LayoutAuth />}>
             <Route index element={<Home />} />
-            <Route path='perfil/:id' element={<Perfil />} />
+            <Route path='perfil/:id' element={<PerfilDinamic />} />
           </Route>
 
         </Routes>

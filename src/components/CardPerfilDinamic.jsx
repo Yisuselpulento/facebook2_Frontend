@@ -1,11 +1,10 @@
 import React from 'react'
 import { LocationIcon } from '../assets/icons/iconos'
-import { buttons } from '../helpers/TailwindVar'
 
-export const PerfilDinamic = ({ usuario }) => {
+export const CardPerfilDinamic = ({ usuario }) => {
   return (
 
-    <div className='bg-white dark:bg-primary p-4 shadow h-[400px] rounded w-[550px] md:flex hidden flex-col gap-5 text-gray-700 dark:text-font1'>
+    <div className='bg-white dark:bg-primary p-4 shadow md:h-[400px] rounded md:w-[550px] md:flex flex-col gap-5 text-gray-700 dark:text-font1'>
       <div className='flex justify-between items-center'>
         <div className='flex gap-3 items-center'>
           <div>

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import useAuth from '../hooks/useAuth'
 import { PostsHome } from '../components/PostsHome'
 import HeadInputPost from '../components/HeadInputPost'
 import { fetchPostUser } from '../services/postsFetch.js'
 import { useParams } from 'react-router-dom'
 import { fetchUserbyId } from '../services/userFetch.js'
-import { PerfilDinamic } from '../components/PerfilDinamic'
+import { CardPerfilDinamic } from '../components/CardPerfilDinamic'
 
-export const Perfil = () => {
+export const PerfilDinamic = () => {
   const [postUser, setpostUser] = useState([])
   const [cargando, setcargando] = useState(true)
   const [usuario, setUsuario] = useState('')
@@ -27,8 +26,8 @@ export const Perfil = () => {
 
   return (
 
-    <div className='flex gap-10'>
-      <PerfilDinamic usuario={usuario} />
+    <div className='flex gap-10   flex-col md:flex-row'>
+      <CardPerfilDinamic usuario={usuario} />
       <div>
         <HeadInputPost placeholder='Dejale un post' />
         {!cargando

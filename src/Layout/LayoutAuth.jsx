@@ -29,7 +29,7 @@ export const LayoutAuth = () => {
               <section className='md:w-[1000px] '>
                 <Outlet />
               </section>
-              <section className='flex md:flex-col gap-7 '>
+              <section className='flex gap-7 flex-col'>
                 <div className='bg-white dark:bg-primary w-[300px] rounded p-4 flex flex-col gap-2 '>
                   <div className='flex justify-between'>
                     <p className='text-black dark:text-font1'>Lorem ipsum</p>
