@@ -17,7 +17,7 @@ const MobilNav = () => {
       </Link>
       <Link
         className={buttons}
-        to='/perfil'
+        to='perfil'
       >
         <PerfilIcon color='white' />
       </Link>

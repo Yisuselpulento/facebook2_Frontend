@@ -4,6 +4,7 @@ import io from 'socket.io-client'
 import { MsjComponent } from './MsjComponent'
 import clienteAxios from '../config/clienteAxios'
 import useAuth from '../hooks/useAuth'
+import Recomendaciones from './Recomendaciones'
 
 const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
 
@@ -71,10 +72,9 @@ const ChatGroup = () => {
   return (
 
     <div>
-      <div className='w-[290px] h-[100px] flex flex-col justify-between p-3'>
-        <button className='bg-blue-700 p-2 rounded-full fixed left-1 top-1'>
-          <GroupIcon color='white' />
-        </button>
+
+      <div className='flex flex-col justify-between p-3 w-full dark:bg-primary rounded-lg'>
+
         <div className='flex flex-col gap-3'>
           <div className='h-[400px] bg-gray-100 p-3 flex flex-col gap-2 overflow-auto'>
             {chat.map((msg, index) => (
@@ -82,7 +82,7 @@ const ChatGroup = () => {
             ))}
           </div>
 
-          <div className='flex bg-gray-300 p-1 rounded-full gap-2 w-full'>
+          <div className='flex bg-gray-300 p-1 rounded-full gap-2 w-full items-center justify-center'>
             <button
               onClick={sendMessage}
               className='bg-blue-700 rounded-full p-2'

@@ -10,6 +10,7 @@ import ConfirmarCuenta from './pages/ConfirmarCuenta'
 import { AuthProvider } from './context/AuthProvider'
 import { PerfilDinamic } from './pages/PerfilDinamic'
 import { NotFound } from './pages/NotFound'
+import Perfil from './pages/Perfil'
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
 
           <Route path='/home' element={<LayoutAuth />}>
             <Route index element={<Home />} />
+            <Route path='perfil' element={<Perfil />} />
             <Route path='perfil/:id' element={<PerfilDinamic />} />
           </Route>
 

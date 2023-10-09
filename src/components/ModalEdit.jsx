@@ -1,11 +1,8 @@
 import { buttons } from '../helpers/TailwindVar'
 import useAuth from '../hooks/useAuth'
 import { useState } from 'react'
-import Modal from 'react-modal'
 import { editPerfilFetch, changeImage } from '../services/perfilFetch.js'
-import { SessionOut } from '../assets/icons/iconos'
 
-Modal.setAppElement('#root')
 const ModalEdit = () => {
   const { modalEdit, setModalEdit, auth } = useAuth()
   const [selectedFile, setSelectedFile] = useState(null)
@@ -48,24 +45,24 @@ const ModalEdit = () => {
   }
   return (
 
-    <div className='flex flex-col items-center  bg-white dark:bg-primary shadow-lg text-gray-700 dark:text-font1 text-xl font-bold p-5 rounded-lg '>
-      <div className='flex flex-col gap-2 items-center sa '>
+    <div className='flex flex-col items-center  bg-white dark:bg-primary shadow-lg text-gray-700 dark:text-font1 md:text-xl md:font-bold p-5 rounded-lg '>
+      <div className='flex flex-col gap-2 items-center '>
         <img
           className='w-20 h-20 rounded-full object-cover border border-gray-700'
           src={`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/avatar/${auth.image}`}
         />
         <form
           onSubmit={handleSubmitImg}
-          className='flex flex-col gap-4'
+          className='flex flex-col gap-4 items-center'
         >
           <label className='flex flex-col items-center gap-3'>
             Elige tu foto:
             <input type='file' name='file0' accept='image/*' onChange={handleFileChange} />
           </label>
           <button
-            className={`${buttons} py-2 rounded`}
+            className={`${buttons} w-[150px] py-2 rounded`}
             type='submit'
-          >Cambiar Avatar
+          >Guardar Avatar
           </button>
         </form>
 
@@ -77,7 +74,7 @@ const ModalEdit = () => {
         <div className='flex gap-5 items-center'>
           <label htmlFor='sexo'>Sexo:</label>
           <select
-            className='text-black w-[200px] rounded p-2'
+            className='text-black md:w-[200px] rounded p-2'
             name='sexo' id='sexo' value={formData.sexo} onChange={handleChange}
           >
             <option value='Superior'>Superior</option>
@@ -89,7 +86,7 @@ const ModalEdit = () => {
         <div className='flex gap-5 items-center'>
           <label htmlFor='age'>Edad:</label>
           <input
-            className='text-black w-[200px] rounded p-2'
+            className='text-black md:w-[200px] rounded p-2'
             type='number'
             id='age'
             name='age'
@@ -103,7 +100,7 @@ const ModalEdit = () => {
         <div className='flex gap-5 items-center'>
           <label htmlFor='country'>País:</label>
           <select
-            className='text-black w-[200px] rounded p-2'
+            className='text-black md:w-[200px] rounded p-2'
             name='country' id='country' value={formData.country} onChange={handleChange}
           >
             <option value='Chile'>Chile</option>
@@ -115,11 +112,6 @@ const ModalEdit = () => {
           className={`px-3 py-2 rounded ${buttons} `}
           type='submit'
         >Guardar cambios
-        </button>
-        <button
-          onClick={() => setModalEdit(!modalEdit)}
-        >
-          <SessionOut color='white' />
         </button>
       </form>
     </div>

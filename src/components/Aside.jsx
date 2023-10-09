@@ -2,8 +2,6 @@ import useAuth from '../hooks/useAuth'
 import { Config, LocationIcon } from '../assets/icons/iconos'
 import { Link } from 'react-router-dom'
 import { buttons } from '../helpers/TailwindVar'
-import { ModalEdit } from './ModalEdit'
-import Modal from 'react-modal'
 
 export const Aside = () => {
   const { auth, modalEdit, setModalEdit } = useAuth()
@@ -22,7 +20,7 @@ export const Aside = () => {
             <h2 className='text-lg  font-bold'>{auth.nombre}</h2>
             <Link
               className={`${buttons} bg-blue-700 py-1 px-2 rounded-full text-font1 hover:bg-blue-800`}
-              to={`/perfil/${auth._id}`}
+              to='perfil'
             >
               Ver Perfil
             </Link>
@@ -56,14 +54,6 @@ export const Aside = () => {
           <Config color='white' />
         </button>
       </div>
-      {modalEdit &&
-        <Modal
-
-          className='w-[500px] m-auto h-auto'
-          isOpen={modalEdit}
-        >
-          <ModalEdit />
-        </Modal>}
     </aside>
   )
 }

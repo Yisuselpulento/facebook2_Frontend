@@ -2,18 +2,16 @@ import { Footer } from '../components/Footer'
 import { Navigate, Outlet } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import { NavAuth } from '../components/NavAuth'
-import { Aside } from '../components/Aside'
 import IMG from '../assets/img/promocion.webp'
 import Recomendaciones from '../components/Recomendaciones'
-import Modal from 'react-modal'
 import { ChatIcon } from '../assets/icons/iconos'
 import { ChatGroup } from '../components/ChatGroup'
 import MobilNav from '../components/MobilNav'
-
-Modal.setAppElement('#root')
+import Modal from '../components/Modal'
+import { ModalEdit } from '../components/ModalEdit'
 
 export const LayoutAuth = () => {
-  const { auth, cargando, setModalChat, modalChat } = useAuth()
+  const { auth, cargando, setModalChat, modalChat, modalEdit, setModalEdit } = useAuth()
 
   if (cargando) return 'Cargando...'
   return (
@@ -25,7 +23,7 @@ export const LayoutAuth = () => {
             <header>
               <NavAuth />
             </header>
-            <main className=' md:flex justify-center gap-12 min-h-[800px] p-4'>
+            <main className=' md:flex justify-center gap-10 min-h-[800px] p-4'>
               <section className='md:w-[1000px] '>
                 <Outlet />
               </section>
@@ -69,10 +67,14 @@ export const LayoutAuth = () => {
 
       {modalChat &&
         <Modal
-         /*  customStyles={customStyles} */
+          onClose={() => setModalChat(false)}
           isOpen={modalChat}
         >
           <ChatGroup />
+        </Modal>}
+      {modalEdit &&
+        <Modal isOpen={modalEdit} onClose={() => setModalEdit(false)}>
+          <ModalEdit />
         </Modal>}
 
     </div>
