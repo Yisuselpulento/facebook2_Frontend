@@ -6,7 +6,12 @@ import useAuth from '../hooks/useAuth'
 import { buttons } from '../helpers/TailwindVar'
 
 export const NavAuth = () => {
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState(() => {
+    if (window.matchMedia('(prefers-color-shceme: dark)').matches) {
+      return 'light'
+    }
+    return 'dark'
+  })
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -15,8 +20,7 @@ export const NavAuth = () => {
   }, [theme])
 
   const handleChangeMode = () => {
-    console.log('cambiando tema')
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark')
   }
 
   const { setAuth } = useAuth()

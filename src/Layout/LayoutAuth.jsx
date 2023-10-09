@@ -26,8 +26,7 @@ export const LayoutAuth = () => {
               <NavAuth />
             </header>
             <main className=' md:flex justify-center gap-12 min-h-[800px] p-4'>
-              <Aside />
-              <section className='md:w-[650px]'>
+              <section className='md:w-[1000px] '>
                 <Outlet />
               </section>
               <section className='flex md:flex-col gap-7 '>

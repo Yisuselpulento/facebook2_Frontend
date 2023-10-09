@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import { handleDeleteComment } from '../services/commentsFetch'
+import { Link } from 'react-router-dom'
 
 const CardComments = ({ comment }) => {
   const [buttonDeleted, setbuttonDeleted] = useState(false)
@@ -14,11 +15,14 @@ const CardComments = ({ comment }) => {
   const deleteComment = () => {
     handleDeleteComment(comment._id)
   }
-
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex justify-between'>
-        <p className='text-font2 font-bold'>{comment.author.nombre}</p>
+        <Link
+          to={`perfil/${comment.author._id}`}
+          className='text-font2 font-bold'
+        >{comment.author.nombre}
+        </Link>
         {buttonDeleted &&
           <button
             onClick={deleteComment}

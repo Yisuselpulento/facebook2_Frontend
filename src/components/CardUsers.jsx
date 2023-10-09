@@ -2,7 +2,7 @@ import { AddFriend } from '../assets/icons/iconos'
 
 export const CardUsers = ({ user }) => {
   return (
-    <button className='flex justify-between text-gray-700 dark:text-font1 bg-gray-200 dark:bg-neutral-800 p-3 rounded-full'>
+    <div className='flex justify-between text-gray-700 dark:text-font1 bg-gray-200 dark:bg-neutral-800 p-3 rounded-full'>
       <div className='flex gap-3 items-center'>
         <div>
           <img
@@ -15,6 +15,6 @@ export const CardUsers = ({ user }) => {
 
       <button><AddFriend color='blue' /></button>
 
-    </button>
+    </div>
   )
 }

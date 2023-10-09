@@ -9,7 +9,7 @@ export const Aside = () => {
   const { auth, modalEdit, setModalEdit } = useAuth()
 
   return (
-    <aside className='bg-white dark:bg-primary p-4 shadow h-[400px] rounded w-[330px] md:flex hidden flex-col gap-5 text-gray-700 dark:text-font1'>
+    <aside className='bg-white dark:bg-primary p-4 shadow h-[400px] rounded w-[550px] md:flex hidden flex-col gap-5 text-gray-700 dark:text-font1'>
       <div className='flex justify-between items-center'>
         <div className='flex gap-3 items-center'>
           <div>
@@ -22,7 +22,7 @@ export const Aside = () => {
             <h2 className='text-lg  font-bold'>{auth.nombre}</h2>
             <Link
               className={`${buttons} bg-blue-700 py-1 px-2 rounded-full text-font1 hover:bg-blue-800`}
-              to='/perfil'
+              to={`/perfil/${auth._id}`}
             >
               Ver Perfil
             </Link>

@@ -4,7 +4,7 @@ import { Img } from '../assets/icons/iconos'
 import useAuth from '../hooks/useAuth'
 import { Postear } from '../services/postsFetch'
 
-const HeadInputPost = ({ setGlobalPost }) => {
+const HeadInputPost = ({ setGlobalPost, placeholder }) => {
   const [inputPost, setInputPost] = useState('')
   const { auth } = useAuth()
 
@@ -16,7 +16,7 @@ const HeadInputPost = ({ setGlobalPost }) => {
   }
 
   return (
-    <div className='bg-white shadow dark:bg-primary rounded h-[150px] mb-10  p-4 justify-center flex flex-col gap-5'>
+    <div className='bg-white shadow dark:bg-primary rounded h-[150px] mb-10 md:w-[650px]  p-4 justify-center flex flex-col gap-5'>
       <div className='flex gap-5 items-center'>
         <div>
           <img
@@ -25,7 +25,7 @@ const HeadInputPost = ({ setGlobalPost }) => {
           />
         </div>
         <input
-          type='text' placeholder='Write here...' className='bg-gray-200 dark:bg-neutral-800 rounded-full h-[55px] w-full p-5 text-font1'
+          type='text' placeholder={placeholder} className='bg-gray-200 dark:bg-neutral-800 rounded-full h-[55px] w-full p-5 text-font1'
           value={inputPost}
           onChange={e => setInputPost(e.target.value)}
         />

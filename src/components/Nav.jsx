@@ -12,7 +12,6 @@ export const Nav = () => {
   }, [theme])
 
   const handleChangeMode = () => {
-    console.log('cambiando tema')
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
   }
 

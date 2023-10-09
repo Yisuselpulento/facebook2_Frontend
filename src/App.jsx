@@ -27,11 +27,9 @@ const App = () => {
 
           <Route path='/home' element={<LayoutAuth />}>
             <Route index element={<Home />} />
+            <Route path='perfil/:id' element={<Perfil />} />
           </Route>
 
-          <Route path='/perfil' element={<LayoutAuth />}>
-            <Route index element={<Perfil />} />
-          </Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

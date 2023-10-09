@@ -4,6 +4,7 @@ import useAuth from '../hooks/useAuth/'
 import CardComments from './CardComments'
 import { fetchComments, handlePostComment } from '../services/commentsFetch'
 import { deletePost } from '../services/postsFetch'
+import { Link } from 'react-router-dom'
 
 export const PostsHome = ({ post }) => {
   const { auth } = useAuth()
@@ -46,9 +47,12 @@ export const PostsHome = ({ post }) => {
           />
         </div>
         <div className='flex justify-between w-full'>
-          <button className='font-bold'>
+          <Link
+            to={`perfil/${post.author}`}
+            className='font-bold'
+          >
             {post.NameAuthor}
-          </button>
+          </Link>
           {buttonDelette &&
             <button
               onClick={handleDeletePost}
