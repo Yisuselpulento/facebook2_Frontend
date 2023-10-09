@@ -22,13 +22,13 @@ const CardComments = ({ comment }) => {
         {buttonDeleted &&
           <button
             onClick={deleteComment}
-            className='bg-red-400 px-2 py-1 font-bold '
+            className='bg-red-400 text-white hover:bg-red-500 px-2 py-1 font-bold '
           >Borrar
           </button>}
 
       </div>
 
-      <p className='bg-neutral-800 p-2 rounded'>{comment.content}</p>
+      <p className='bg-gray-100 dark:bg-neutral-800 p-2 rounded'>{comment.content}</p>
 
     </div>
   )

@@ -28,7 +28,8 @@ const deletePost = async (id) => {
       }
     }
 
-    await clienteAxios.delete(`posts/${id}`, config)
+    const data = await clienteAxios.delete(`posts/${id}`, config)
+    console.log(data)
   } catch (error) {
     console.log(error.response.data)
   }

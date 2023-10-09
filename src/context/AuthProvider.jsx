@@ -7,8 +7,8 @@ const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({})
   const [cargando, setCargando] = useState(true)
-  const [modal, setModal] = useState(false)
   const [modalEdit, setModalEdit] = useState(false)
+  const [modalChat, setModalChat] = useState(false)
 
   const navigate = useNavigate()
 
@@ -51,10 +51,10 @@ const AuthProvider = ({ children }) => {
         setAuth,
         cargando,
         cerrarSesionAuth,
-        setModal,
-        modal,
         setModalEdit,
-        modalEdit
+        modalEdit,
+        setModalChat,
+        modalChat
 
       }}
     >

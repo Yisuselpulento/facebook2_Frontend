@@ -8,7 +8,7 @@ import useAuth from '../hooks/useAuth'
 const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
 
 const ChatGroup = () => {
-  const { modal, setModal } = useAuth()
+  const { modalChat, setModalChat } = useAuth()
   // socket io
   const [message, setMessage] = useState('')
   const [chat, setChat] = useState([])
@@ -71,7 +71,7 @@ const ChatGroup = () => {
   return (
 
     <div>
-      <div className='w-[330px] h-[460px] flex flex-col justify-between static'>
+      <div className='w-[290px] h-[100px] flex flex-col justify-between p-3'>
         <button className='bg-blue-700 p-2 rounded-full fixed left-1 top-1'>
           <GroupIcon color='white' />
         </button>
@@ -101,7 +101,7 @@ const ChatGroup = () => {
 
       </div>
       <button
-        onClick={() => setModal(!modal)}
+        onClick={() => setModalChat(!modalChat)}
         className='bg-blue-700 rounded-full p-3 md:p-4 fixed bottom-4 right-4'
       >
         <ChatIcon color='white' />

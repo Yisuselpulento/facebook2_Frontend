@@ -25,7 +25,7 @@ export const Perfil = () => {
       <HeadInputPost />
       {!cargando
         ? postUser.map(post => (
-          <div key={post._id} className='bg-primary rounded p-4 mb-6  '>
+          <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-4 mb-6  '>
             <PostsHome post={post} />
           </div>
         ))
