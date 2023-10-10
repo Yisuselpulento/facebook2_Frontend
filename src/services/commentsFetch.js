@@ -30,7 +30,8 @@ const handlePostComment = async (id, comentaio) => {
       }
     }
 
-    await clienteAxios.post(`comments/${id}`, { content: comentaio }, config)
+    const { data } = await clienteAxios.post(`comments/${id}`, { content: comentaio }, config)
+    return data
   } catch (error) {
     console.log(error.response.data)
   }

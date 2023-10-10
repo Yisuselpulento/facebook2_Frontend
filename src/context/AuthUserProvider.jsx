@@ -2,14 +2,14 @@ import { useState, useEffect, createContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import clienteAxios from '../config/clienteAxios'
 
-const AuthContext = createContext()
+const AuthUserContext = createContext()
 
-const AuthProvider = ({ children }) => {
+const AuthUserProvider = ({ children }) => {
   const [auth, setAuth] = useState({})
   const [cargando, setCargando] = useState(true)
   const [modalEdit, setModalEdit] = useState(false)
   const [modalChat, setModalChat] = useState(false)
-
+  const [globalPost, setGlobalPost] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
       try {
         const { data } = await clienteAxios('/usuarios/perfil', config)
         setAuth(data)
-      /*   navigate('/home') */
+        navigate('/home')
       } catch (error) {
         setAuth({})
       }
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider
+    <AuthUserContext.Provider
       value={{
         auth,
         setAuth,
@@ -54,17 +54,19 @@ const AuthProvider = ({ children }) => {
         setModalEdit,
         modalEdit,
         setModalChat,
-        modalChat
+        modalChat,
+        setGlobalPost,
+        globalPost
 
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </AuthUserContext.Provider>
   )
 }
 
 export {
-  AuthProvider
+  AuthUserProvider
 }
 
-export default AuthContext
+export default AuthUserContext

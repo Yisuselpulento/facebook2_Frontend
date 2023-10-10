@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './Layout/Layout'
-import { LayoutAuth } from './Layout/LayoutAuth'
+import { LayoutUserAuth } from './Layout/LayoutUserAuth'
 import { Login } from './pages/Login'
 import { Home } from './pages/Home'
 import { OlvidePassword } from './pages/OlvidePassword'
 import { Registrarse } from './pages/Registrarse'
 import NuevoPassword from './pages/NuevoPassword'
 import ConfirmarCuenta from './pages/ConfirmarCuenta'
-import { AuthProvider } from './context/AuthProvider'
+import { AuthUserProvider } from './context/AuthUserProvider'
 import { PerfilDinamic } from './pages/PerfilDinamic'
 import { NotFound } from './pages/NotFound'
 import Perfil from './pages/Perfil'
@@ -15,7 +15,8 @@ import Perfil from './pages/Perfil'
 const App = () => {
   return (
     <BrowserRouter>
-      <AuthProvider>
+      <AuthUserProvider>
+
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Login />} />
@@ -26,14 +27,14 @@ const App = () => {
             <Route path='*' element={<NotFound />} />
           </Route>
 
-          <Route path='/home' element={<LayoutAuth />}>
+          <Route path='/home' element={<LayoutUserAuth />}>
             <Route index element={<Home />} />
             <Route path='perfil' element={<Perfil />} />
             <Route path='perfil/:id' element={<PerfilDinamic />} />
           </Route>
 
         </Routes>
-      </AuthProvider>
+      </AuthUserProvider>
     </BrowserRouter>
   )
 }

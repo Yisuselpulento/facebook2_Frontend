@@ -10,7 +10,7 @@ import MobilNav from '../components/MobilNav'
 import Modal from '../components/Modal'
 import { ModalEdit } from '../components/ModalEdit'
 
-export const LayoutAuth = () => {
+export const LayoutUserAuth = () => {
   const { auth, cargando, setModalChat, modalChat, modalEdit, setModalEdit } = useAuth()
 
   if (cargando) return 'Cargando...'
@@ -59,7 +59,7 @@ export const LayoutAuth = () => {
             <footer className='shadow-t-lg'>
               <Footer />
             </footer>
-            {/*  */}
+
           </div>
           )
         : <Navigate to='/' />}

@@ -4,14 +4,14 @@ import { Img } from '../assets/icons/iconos'
 import useAuth from '../hooks/useAuth'
 import { Postear } from '../services/postsFetch'
 
-const HeadInputPost = ({ setGlobalPost, placeholder }) => {
+const HeadInputPost = ({ placeholder }) => {
   const [inputPost, setInputPost] = useState('')
-  const { auth } = useAuth()
+  const { auth, setGlobalPost } = useAuth()
 
-  const handleNewPost = () => {
+  const handleNewPost = async () => {
     if (inputPost === '') return
-    Postear(inputPost)
-    /*  setGlobalPost(prevPosts => [...prevPosts, inputPost]) */
+    const data = await Postear(inputPost)
+    setGlobalPost(prevPosts => [data, ...prevPosts])
     setInputPost('')
   }
 

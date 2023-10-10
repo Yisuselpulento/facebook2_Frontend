@@ -6,6 +6,7 @@ import { editPerfilFetch, changeImage } from '../services/perfilFetch.js'
 const ModalEdit = () => {
   const { modalEdit, setModalEdit, auth } = useAuth()
   const [selectedFile, setSelectedFile] = useState(null)
+
   const [formData, setFormData] = useState({
     sexo: '',
     age: '',
@@ -20,14 +21,14 @@ const ModalEdit = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     editPerfilFetch(auth._id, formData)
+
     setModalEdit(!modalEdit)
   }
 
   const handleFileChange = (e) => {
-    console.log('cambiando png')
     setSelectedFile(e.target.files[0])
   }
 

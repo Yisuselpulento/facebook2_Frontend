@@ -1,6 +1,6 @@
 import clienteAxios from '../config/clienteAxios'
 
-const editPerfilFetch = async (id, data) => {
+const editPerfilFetch = async (id, form) => {
   try {
     const token = localStorage.getItem('token')
     if (!token) return
@@ -11,7 +11,7 @@ const editPerfilFetch = async (id, data) => {
       }
     }
 
-    await clienteAxios.put(`usuarios/editar-perfil/${id}`, data, config)
+    await clienteAxios.put(`usuarios/editar-perfil/${id}`, form, config)
   } catch (error) {
     console.log(error)
   }
