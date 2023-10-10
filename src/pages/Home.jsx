@@ -20,13 +20,13 @@ export const Home = () => {
   }, [])
 
   return (
-    <div className='flex gap-10'>
+    <div className='flex gap-8'>
       <Aside />
       <div className='flex flex-col '>
         <HeadInputPost placeholder='Escribe algo' />
         {!cargando
           ? globalPost.map(post => (
-            <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-4 mb-6  '>
+            <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-3 mb-5  '>
               <PostsHome post={post} />
             </div>
           ))

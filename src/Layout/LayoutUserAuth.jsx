@@ -19,16 +19,16 @@ export const LayoutUserAuth = () => {
     <div>
       {auth._id
         ? (
-          <div className=' flex flex-col gap-14'>
+          <div className=' flex flex-col gap-10'>
             <header>
               <NavAuth />
             </header>
-            <main className=' md:flex justify-center gap-10 min-h-[800px] p-4'>
-              <section className='md:w-[1000px] '>
+            <main className=' md:flex justify-center gap-7 min-h-[vh] p-4'>
+              <section className='md:w-[940px] '>
                 <Outlet />
               </section>
               <section className='flex gap-7 flex-col'>
-                <div className='bg-white dark:bg-primary w-[300px] rounded p-4 flex flex-col gap-2 '>
+                <div className='bg-white dark:bg-primary w-[270px] rounded p-4 flex flex-col gap-1 '>
                   <div className='flex justify-between'>
                     <p className='text-black dark:text-font1'>Lorem ipsum</p>
                     <p className='text-font2'>Lorem</p>
@@ -50,7 +50,7 @@ export const LayoutUserAuth = () => {
 
               <button
                 onClick={() => setModalChat(!modalChat)}
-                className='bg-blue-700 rounded-full p-3 md:p-4 fixed bottom-4 right-4'
+                className='bg-blue-700 rounded-full p-2 md:p-4 fixed bottom-4 right-4'
               >
                 <ChatIcon color='white' />
               </button>

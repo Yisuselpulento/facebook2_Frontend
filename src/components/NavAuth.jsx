@@ -31,10 +31,10 @@ export const NavAuth = () => {
   }
 
   return (
-    <div className='bg-white dark:bg-primary shadow h-[70px] flex justify-between items-center p-5 '>
+    <div className='bg-white dark:bg-primary shadow h-[48px] flex justify-between items-center p-3 '>
       <Link
         to='/home'
-        className='text-3xl font-bold text-blue-500 md:flex hidden'
+        className='text-2xl font-bold text-blue-500 md:flex hidden'
       >Facebook2
 
       </Link>
@@ -48,7 +48,7 @@ export const NavAuth = () => {
         </button>
         <button
           onClick={handleSesionClose}
-          className={`px-4 rounded py-2 font-bold flex gap-2 ${buttons}`}
+          className={`text-center px-3 rounded py-1 font-bold flex gap-2 ${buttons} flex items-center`}
         >Out
           <SessionOut color='white' />
         </button>

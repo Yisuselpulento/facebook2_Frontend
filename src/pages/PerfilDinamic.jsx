@@ -26,7 +26,7 @@ export const PerfilDinamic = () => {
 
   return (
 
-    <div className='flex gap-10   flex-col md:flex-row'>
+    <div className='flex gap-10 justify-center items-center md:justify-normal md:items-start  flex-col md:flex-row'>
       <CardPerfilDinamic usuario={usuario} />
       <div>
         <HeadInputPost placeholder='Dejale un post' />

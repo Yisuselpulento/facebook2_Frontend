@@ -20,11 +20,11 @@ const Recomendaciones = () => {
   }, [])
 
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col gap-3'>
       <p className='text-font2'>
         Recomendaciones
       </p>
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col gap-3'>
         {!cargando
           ? users.map(user => (
             <CardUsers key={user._id} user={user} />

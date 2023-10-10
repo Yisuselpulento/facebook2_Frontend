@@ -41,7 +41,7 @@ const ModalEdit = () => {
   }
 
   return (
-    <div className='flex flex-col items-center bg-white dark:bg-primary shadow-lg text-gray-700 dark:text-font1 md:text-xl md:font-bold p-5 rounded-lg'>
+    <div className='flex flex-col items-center bg-white dark:bg-primary shadow-lg text-gray-700 dark:text-font1 md:text-lg md:font-semibold p-5 rounded-lg'>
       <div className='flex flex-col gap-2 items-center'>
         <img
           className='w-20 h-20 rounded-full object-cover border border-gray-700'
@@ -57,7 +57,7 @@ const ModalEdit = () => {
           <div className='flex gap-5 items-center'>
             <label htmlFor='sexo'>Sexo:</label>
             <select
-              className='text-black md:w-[200px] rounded p-2'
+              className='text-black md:w-[180px] rounded p-1'
               name='sexo'
               id='sexo'
               value={formData.sexo}
@@ -72,7 +72,7 @@ const ModalEdit = () => {
           <div className='flex gap-5 items-center'>
             <label htmlFor='age'>Edad:</label>
             <input
-              className='text-black md:w-[200px] rounded p-2'
+              className='text-black md:w-[180px] rounded p-1'
               type='number'
               id='age'
               name='age'
@@ -86,7 +86,7 @@ const ModalEdit = () => {
           <div className='flex gap-5 items-center'>
             <label htmlFor='country'>País:</label>
             <select
-              className='text-black md:w-[200px] rounded p-2'
+              className='text-black md:w-[180px] rounded p-1'
               name='country'
               id='country'
               value={formData.country}
@@ -97,7 +97,7 @@ const ModalEdit = () => {
             </select>
           </div>
 
-          <button className={`px-3 py-2 rounded ${buttons}`}>Guardar cambios</button>
+          <button className={`px-2 py-1 rounded ${buttons}`}>Guardar cambios</button>
         </form>
       </div>
     </div>

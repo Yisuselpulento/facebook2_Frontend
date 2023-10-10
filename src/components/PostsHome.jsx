@@ -26,9 +26,6 @@ export const PostsHome = ({ post }) => {
   }
 
   useEffect(() => {
-    console.log(auth)
-    console.log(post)
-
     const getComments = async () => {
       const data = await fetchComments(post)
       setPostComments(data)
@@ -69,7 +66,7 @@ export const PostsHome = ({ post }) => {
 
   return (
 
-    <div className='flex flex-col gap-5 text-gray-700 dark:text-font1'>
+    <div className='flex flex-col gap-4 text-gray-700 dark:text-font1'>
       <div className='flex gap-3 items-center'>
         <div>
           <img
@@ -89,7 +86,7 @@ export const PostsHome = ({ post }) => {
           {shouldShowDeleteButton && (
             <button
               onClick={handleDeletePost}
-              className='bg-red-400 text-white hover:bg-red-500 py-1 px-3 rounded'
+              className='bg-red-400 text-white hover:bg-red-500 px-2 rounded'
             >
               Borrar
             </button>
@@ -97,10 +94,10 @@ export const PostsHome = ({ post }) => {
         </div>
 
       </div>
-      <div className='bg-gray-100 dark:bg-neutral-800 rounded-lg p-3'>
+      <div className='bg-gray-100 dark:bg-neutral-800 rounded-lg p-2'>
         {post.content}
       </div>
-      <div className='flex gap-3'>
+      <div className='flex gap-2'>
         <button onClick={handleChangeLike}>
           {like ? <HeartLike color='red' /> : <HeartDislike />}
         </button>
@@ -119,17 +116,17 @@ export const PostsHome = ({ post }) => {
         )}
       </div>
 
-      <div className='md:flex gap-2'>
+      <div className='md:flex gap-1 items-center'>
 
         <input
-          className='bg-gray-200 dark:bg-stone-800 py-3 px-3 w-full'
-          type='text' placeholder='Comment'
+          className='bg-gray-200 dark:bg-stone-800 px-2 w-full h-10'
+          type='text' placeholder='Comenta'
           onChange={e => setcomentario(e.target.value)}
           value={comentario}
         />
         <button
           onClick={submitComment}
-          className={`${buttons}rounded py-3 px-4 mt-2 `}
+          className={`${buttons}rounded py-2 px-3 mt-2 md:mt-0`}
         >Enviar
         </button>
       </div>
