@@ -11,7 +11,8 @@ const editPerfilFetch = async (id, form) => {
       }
     }
 
-    await clienteAxios.put(`usuarios/editar-perfil/${id}`, form, config)
+    const updateDAta = await clienteAxios.put(`usuarios/editar-perfil/${id}`, form, config)
+    return updateDAta.data
   } catch (error) {
     console.log(error)
   }
@@ -30,13 +31,8 @@ const changeImage = async (data) => {
 
     const response = await clienteAxios.post('/usuarios/upload', data, config)
 
-    if (response.ok) {
-      const data = await response.json()
-      console.log('Respuesta del servidor:', data)
-      return response
-    } else {
-      console.error('Error al subir la imagen:', response.statusText)
-    }
+    console.log('Respuesta del servidor:', data)
+    return response
   } catch (error) {
     console.log('Hubo un error al subir la imagen ', error)
   }

@@ -12,6 +12,13 @@ const AuthUserProvider = ({ children }) => {
   const [globalPost, setGlobalPost] = useState([])
   const navigate = useNavigate()
 
+  const updateUser = (updatedData) => {
+    setAuth(prevAuth => ({
+      ...prevAuth,
+      ...updatedData
+    }))
+  }
+
   useEffect(() => {
     const autenticarUsuario = async () => {
       const token = localStorage.getItem('token')
@@ -56,7 +63,8 @@ const AuthUserProvider = ({ children }) => {
         setModalChat,
         modalChat,
         setGlobalPost,
-        globalPost
+        globalPost,
+        updateUser
 
       }}
     >
