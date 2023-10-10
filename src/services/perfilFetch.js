@@ -24,17 +24,20 @@ const changeImage = async (data) => {
     if (!token) return
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`
       }
     }
 
     const response = await clienteAxios.post('/usuarios/upload', data, config)
 
-    console.log('Respuesta del servidor:', data)
+    console.log('Respuesta del servidor:', response.data)
     return response
   } catch (error) {
-    console.log('Hubo un error al subir la imagen ', error)
+    console.log('Hubo un error al subir la imagen ', error.response)
+
+    if (error.response && error.response.data) {
+      console.log('Mensaje del servidor:', error.response.data.message)
+    }
   }
 }
 
