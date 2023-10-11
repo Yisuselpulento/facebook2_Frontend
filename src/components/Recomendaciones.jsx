@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { CardUsers } from './CardUsers'
 import useAuth from '../hooks/useAuth'
 import { fetchUsers } from '../services/userFetch'
+import Spinner from './Spinner'
 
 const Recomendaciones = () => {
   const { auth } = useAuth()
@@ -30,7 +31,7 @@ const Recomendaciones = () => {
             <CardUsers key={user._id} user={user} />
           ))
 
-          : <p>Cargando...</p>}
+          : <Spinner />}
 
       </div>
     </div>

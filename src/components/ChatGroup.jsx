@@ -4,11 +4,13 @@ import io from 'socket.io-client'
 import { MsjComponent } from './MsjComponent'
 import useAuth from '../hooks/useAuth'
 import { fetchGetMessages, fetchPostMessage } from '../services/messagesFetch'
+import OnlineGroup from './OnlineGroup'
 
 const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
 
 const ChatGroup = () => {
   const { modalChat, setModalChat } = useAuth()
+  const [chatGroup, setchatGroup] = useState(false)
   // socket io
   const [message, setMessage] = useState('')
   const [chat, setChat] = useState([])
@@ -43,8 +45,14 @@ const ChatGroup = () => {
 
   return (
 
-    <div>
-
+    <div className='flex gap-2 '>
+      {chatGroup ? <OnlineGroup /> : <p>si</p>}
+      <button
+        onClick={() => setchatGroup(!chatGroup)}
+        className='fixed top-2 left-2 w-10 h-10 bg-blue-700 rounded-full z-10 flex items-center justify-center'
+      >
+        <GroupIcon color='white' />
+      </button>
       <div className='flex flex-col justify-between p-3 w-full bg-gray-100 dark:bg-primary rounded-lg'>
 
         <div className='flex flex-col gap-3'>

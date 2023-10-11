@@ -12,24 +12,28 @@ export const PostsHome = ({ post }) => {
   const [cargando, setCargando] = useState(true)
   const [comentario, setcomentario] = useState('')
   const [like, setLike] = useState()
-  const [likes, setLikes] = useState(post.likes)
+  const [likes, setLikes] = useState(post.likes || [])
   const [mostrarLikes, setMostrarLikes] = useState(false)
   const [postComments, setPostComments] = useState([])
 
   const shouldShowDeleteButton = post.author._id === auth._id
 
   useEffect(() => {
-    setLike(likes.includes(auth._id))
+    const userHasLiked = likes.some(like => like.userId === auth._id)
+    setLike(userHasLiked)
   }, [])
 
   const handleChangeLike = async () => {
     const data = await likePostFetch(post._id)
     if (data && data.likesCount !== undefined) {
       setLike(data.hasLiked)
-      setLikes(prevLikes => data.hasLiked ? [...prevLikes, auth._id] : prevLikes.filter(id => id !== auth._id))
+      if (data.hasLiked) {
+        setLikes(prevLikes => [...prevLikes, { userId: auth._id, userName: auth.nombre, userImage: auth.image }])
+      } else {
+        setLikes(prevLikes => prevLikes.filter(like => like.userId !== auth._id))
+      }
     }
   }
-
   useEffect(() => {
     const getComments = async () => {
       const data = await fetchComments(post)
@@ -68,7 +72,6 @@ export const PostsHome = ({ post }) => {
     const updatedComments = postComments.filter(c => c._id !== commentId)
     setPostComments(updatedComments)
   }
-
   return (
 
     <div className='flex flex-col gap-3 text-gray-700 dark:text-font1'>
@@ -113,9 +116,18 @@ export const PostsHome = ({ post }) => {
         >{likes.length}
         </p>
         {mostrarLikes && (
-          <div className='absolute z-10 mt-2 w-56 p-4 bg-black rounded shadow-xl transition-opacity opacity-100'>
+          <div className='absolute z-10 mt-6 p-4 bg-black rounded shadow-xl transition-opacity opacity-100'>
             {likes.map((like, index) => (
-              <div key={index}>{like}</div>
+              <div key={index} className='flex items-center gap-2'>
+                <img
+                  width={20}
+                  height={20}
+                  className='rounded-full object-cover border border-gray-300 dark:border-gray-700'
+                  src={`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/avatar/${like.userImage}`}
+                  alt={like.userName}
+                />
+                <span>{like.userName}</span>
+              </div>
             ))}
           </div>
         )}

@@ -23,7 +23,7 @@ export const Home = () => {
   return (
     <div className='flex gap-8'>
       <Aside />
-      <div className='flex flex-col '>
+      <div className='flex flex-col w-full'>
         <HeadInputPost placeholder='Escribe algo' />
         {!cargando
           ? globalPost.map(post => (
@@ -34,7 +34,7 @@ export const Home = () => {
 
           : <div className='flex items-center justify-center'>
             <Spinner />
-            </div>}
+          </div>}
 
       </div>
 

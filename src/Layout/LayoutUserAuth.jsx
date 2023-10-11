@@ -27,7 +27,7 @@ export const LayoutUserAuth = () => {
                 <header>
                   <NavAuth />
                 </header>
-                <main className=' md:flex justify-center gap-7 min-h-[vh] p-4'>
+                <main className=' md:flex justify-center gap-7 min-h-[vh]  p-4'>
                   <section className='md:w-[940px] '>
 
                     <Outlet />
@@ -81,7 +81,7 @@ export const LayoutUserAuth = () => {
             <Modal isOpen={modalEdit} onClose={() => setModalEdit(false)}>
               <ModalEdit />
             </Modal>}
-          </div>}
+        </div>}
 
     </div>
   )
