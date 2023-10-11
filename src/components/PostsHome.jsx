@@ -71,17 +71,17 @@ export const PostsHome = ({ post }) => {
 
   return (
 
-    <div className='flex flex-col gap-4 text-gray-700 dark:text-font1'>
-      <div className='flex gap-3 items-center'>
+    <div className='flex flex-col gap-3 text-gray-700 dark:text-font1'>
+      <div className='flex gap-2 items-center'>
         <div>
           <img
             width={100}
             height={100}
-            className='w-14 h-14 rounded-full object-cover border border-gray-300 dark:border-gray-700'
+            className='w-12 h-12 rounded-full object-cover border border-gray-300 dark:border-gray-700'
             src={`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/avatar/${post.author.image}`}
           />
         </div>
-        <div className='flex justify-between w-full'>
+        <div className='flex justify-between text-sm w-full'>
           <Link
             to={`/perfil/${post.author._id}`}
             className='font-bold'
@@ -131,7 +131,7 @@ export const PostsHome = ({ post }) => {
         />
         <button
           onClick={submitComment}
-          className={`${buttons}rounded py-2 px-3 mt-2 md:mt-0`}
+          className={`${buttons}rounded py-1 px-2 mt-2 md:mt-0`}
         >Enviar
         </button>
       </div>

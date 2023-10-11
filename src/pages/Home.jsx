@@ -26,7 +26,7 @@ export const Home = () => {
         <HeadInputPost placeholder='Escribe algo' />
         {!cargando
           ? globalPost.map(post => (
-            <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-3 mb-5  '>
+            <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-2 mb-5  '>
               <PostsHome post={post} />
             </div>
           ))

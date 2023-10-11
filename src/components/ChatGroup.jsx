@@ -74,7 +74,7 @@ const ChatGroup = () => {
       <div className='flex flex-col justify-between p-3 w-full dark:bg-primary rounded-lg'>
 
         <div className='flex flex-col gap-3'>
-          <div className='h-[420px] p-3 flex flex-col gap-2 overflow-auto'>
+          <div className='h-[420px] flex flex-col gap-2 overflow-auto'>
             {chat.map((msg, index) => (
               <MsjComponent msg={msg} key={index} />
             ))}

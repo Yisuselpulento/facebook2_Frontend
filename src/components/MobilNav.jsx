@@ -8,7 +8,7 @@ const MobilNav = () => {
   const buttons = 'hover:bg-black px-1 w-full py-1 rounded-lg hover:bg-blue-800 flex items-center justify-center'
 
   return (
-    <div className='flex md:hidden bg-gray-800 dark:bg-secundary w-full h-16 rounded-t-md text-white fixed bottom-0 left-0  justify-between  gap-3 '>
+    <div className='flex md:hidden bg-gray-800 dark:bg-secundary w-full h-14 rounded-t-md text-white fixed bottom-0 left-0  justify-between  gap-3 '>
       <Link
         className={buttons}
         to='/home'

@@ -20,7 +20,7 @@ const Perfil = () => {
     getUser()
   }, [])
   return (
-    <div className='flex gap-10'>
+    <div>
       <Aside />
       <div>
         <HeadInputPost />

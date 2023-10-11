@@ -31,14 +31,17 @@ export const NavAuth = () => {
   }
 
   return (
-    <div className='bg-white dark:bg-primary shadow h-[48px] flex justify-between items-center p-3 '>
+    <div className='bg-white dark:bg-primary shadow h-[50px] flex md:justify-between justify-center items-center p-3'>
       <Link
         to='/home'
         className='text-2xl font-bold text-blue-500 md:flex hidden'
       >Facebook2
 
       </Link>
-      <SearchComponent />
+      <div className='flex justify-center'>
+        <SearchComponent />
+      </div>
+
       <div className='hidden md:flex gap-5'>
         <button onClick={handleChangeMode}>
           {theme === 'light' ? <Moon color='white' /> : <Sun color='white' />}

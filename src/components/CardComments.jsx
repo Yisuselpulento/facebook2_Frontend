@@ -29,7 +29,7 @@ const CardComments = ({ comment, removeComment }) => {
         {shouldShowDeleteButton &&
           <button
             onClick={deleteComment}
-            className='bg-red-400 text-white hover:bg-red-500 px-2 py-1 font-bold '
+            className='bg-red-400 text-white hover:bg-red-500 px-1 font-bold text-sm'
           >
             Borrar
           </button>}
