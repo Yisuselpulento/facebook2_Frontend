@@ -24,15 +24,18 @@ const App = () => {
             <Route path='/olvide-password' element={<OlvidePassword />} />
             <Route path='/olvide-password/:token' element={<NuevoPassword />} />
             <Route path='/confirmar/:id' element={<ConfirmarCuenta />} />
-            <Route path='*' element={<NotFound />} />
           </Route>
 
           <Route path='/home' element={<LayoutUserAuth />}>
             <Route index element={<Home />} />
-            <Route path='perfil' element={<Perfil />} />
-            <Route path='perfil/:id' element={<PerfilDinamic />} />
           </Route>
 
+          <Route path='/perfil' element={<LayoutUserAuth />}>
+            <Route index element={<Perfil />} />
+            <Route path=':id' element={<PerfilDinamic />} />
+          </Route>
+
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </AuthUserProvider>
     </BrowserRouter>

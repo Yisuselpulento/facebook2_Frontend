@@ -83,7 +83,7 @@ export const PostsHome = ({ post }) => {
         </div>
         <div className='flex justify-between w-full'>
           <Link
-            to={`perfil/${post.author._id}`}
+            to={`/perfil/${post.author._id}`}
             className='font-bold'
           >
             {post.author.nombre}

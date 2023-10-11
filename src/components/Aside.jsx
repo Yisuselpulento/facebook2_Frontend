@@ -20,7 +20,7 @@ export const Aside = () => {
             <h2 className='text-md  font-bold'>{auth.nombre}</h2>
             <Link
               className={`${buttons} bg-blue-700 px-1 rounded-full text-font1 hover:bg-blue-800`}
-              to='perfil'
+              to='/perfil'
             >
               Ver Perfil
             </Link>
