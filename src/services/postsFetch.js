@@ -83,7 +83,7 @@ const likePostFetch = async (id) => {
       }
     }
 
-    const { data } = await clienteAxios.put(`posts/${id}/like`, config)
+    const { data } = await clienteAxios.put(`posts/${id}/like`, {}, config)
     return data
   } catch (error) {
     console.log(error)

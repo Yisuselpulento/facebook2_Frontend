@@ -18,10 +18,15 @@ export const PostsHome = ({ post }) => {
 
   const shouldShowDeleteButton = post.author._id === auth._id
 
+  useEffect(() => {
+    setLike(likes.includes(auth._id))
+  }, [])
+
   const handleChangeLike = async () => {
     const data = await likePostFetch(post._id)
     if (data && data.likesCount !== undefined) {
       setLike(data.hasLiked)
+      setLikes(prevLikes => data.hasLiked ? [...prevLikes, auth._id] : prevLikes.filter(id => id !== auth._id))
     }
   }
 
@@ -105,7 +110,7 @@ export const PostsHome = ({ post }) => {
           className='cursor pointer outline-2'
           onMouseEnter={() => setMostrarLikes(true)}
           onMouseLeave={() => setMostrarLikes(false)}
-        >{post.likes.length}
+        >{likes.length}
         </p>
         {mostrarLikes && (
           <div className='absolute z-10 mt-2 w-56 p-4 bg-black rounded shadow-xl transition-opacity opacity-100'>
