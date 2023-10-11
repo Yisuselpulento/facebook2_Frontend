@@ -71,7 +71,7 @@ const ChatGroup = () => {
 
     <div>
 
-      <div className='flex flex-col justify-between p-3 w-full dark:bg-primary rounded-lg'>
+      <div className='flex flex-col justify-between p-3 w-full bg-gray-100 dark:bg-primary rounded-lg'>
 
         <div className='flex flex-col gap-3'>
           <div className='h-[420px] flex flex-col gap-2 overflow-auto'>
@@ -83,7 +83,7 @@ const ChatGroup = () => {
           <div className='flex bg-gray-300 p-1 rounded-full gap-2 w-full items-center justify-center'>
             <button
               onClick={sendMessage}
-              className='bg-blue-700 rounded-full p-2'
+              className='bg-blue-700 rounded-full p-1'
             >
               <SendMsj color='white' />
             </button>
@@ -91,7 +91,7 @@ const ChatGroup = () => {
               value={message}
               onChange={e => setMessage(e.target.value)}
               placeholder='Mensaje'
-              className='rounded-lg p-2 w-[250px]'
+              className='rounded-lg p-1 w-[250px]'
             />
           </div>
 
