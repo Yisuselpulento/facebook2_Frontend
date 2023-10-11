@@ -34,18 +34,14 @@ const Perfil = () => {
         <HeadInputPost />
         {!cargando
           ? (
-              postUser.length > 0
-                ? (
-                    postUser.map(post => (
-                      <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-4 mb-6'>
-                        <PostsHome post={post} />
-                      </div>
-                    ))
-                  )
-                : (
-                  <div className='text-center py-4 dark:text-gray-100'>No has escrito ningún post todavía.</div>
-                  )
+
+              postUser.map(post => (
+                <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-4 mb-6'>
+                  <PostsHome post={post} />
+                </div>
+              ))
             )
+
           : (
             <div className='flex items-center justify-center'>
               <Spinner />
