@@ -5,7 +5,6 @@ export const MsjComponent = ({ msg }) => {
   const { auth } = useAuth()
   const isSentByMe = auth._id === msg.user._id
 
-  console.log(msg)
   return (
     <div className={`flex ${isSentByMe ? 'justify-end' : 'justify-start'} w-full px-4`}>
       <div className={`flex flex-col ${isSentByMe ? 'items-end' : 'items-start'} max-w-[80%]`}>

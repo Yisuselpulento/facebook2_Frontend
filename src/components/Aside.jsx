@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { buttons } from '../helpers/TailwindVar'
 
 export const Aside = () => {
-  const { auth, modalEdit, setModalEdit } = useAuth()
+  const { auth, modalEdit, setModalEdit, color } = useAuth()
 
   return (
     <aside className='bg-white dark:bg-primary p-4 shadow h-[350px] rounded w-[270px] md:flex hidden flex-col gap-5 text-gray-700 dark:text-font1'>
@@ -40,7 +40,7 @@ export const Aside = () => {
       </div>
       <div className=' flex gap-8'>
         <div className='flex gap-2'>
-          <LocationIcon color='white' />
+          <LocationIcon color={color} />
           <p>Pais:</p>
         </div>
 

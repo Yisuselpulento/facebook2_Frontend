@@ -4,6 +4,7 @@ import HeadInputPost from '../components/HeadInputPost'
 import useAuth from '../hooks/useAuth'
 import { PostsHome } from '../components/PostsHome'
 import { fetchPostUser } from '../services/postsFetch'
+import Spinner from '../components/Spinner'
 
 const Perfil = () => {
   const { auth } = useAuth()
@@ -31,7 +32,9 @@ const Perfil = () => {
             </div>
           ))
 
-          : <p className='text-font1'>Cargando...</p>}
+          : <div className='flex items-center justify-center'>
+            <Spinner />
+          </div>}
       </div>
 
     </div>

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { GroupIcon, SendMsj, ChatIcon } from '../assets/icons/iconos'
 import io from 'socket.io-client'
 import { MsjComponent } from './MsjComponent'
-import clienteAxios from '../config/clienteAxios'
 import useAuth from '../hooks/useAuth'
+import { fetchGetMessages, fetchPostMessage } from '../services/messagesFetch'
 
 const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
 
@@ -14,45 +14,19 @@ const ChatGroup = () => {
   const [chat, setChat] = useState([])
   // socket
   useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const token = localStorage.getItem('token')
-        if (!token) return
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-        const { data } = await clienteAxios('messages', config)
-        setChat(data)
-      } catch (error) {
-        console.log(error)
-      }
+    const getMessages = async () => {
+      const data = await fetchGetMessages()
+      setChat(data)
     }
 
-    fetchMessages()
+    getMessages()
   }, [])
 
   const sendMessage = async () => {
-    try {
-      const token = localStorage.getItem('token')
-      if (!token) return
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }
-
-      const { data } = await clienteAxios.post('messages', { content: message }, config)
-      socketInstance.emit('send_message', data)
-      setChat(prevChat => [...prevChat, data])
-      setMessage('')
-    } catch (error) {
-      console.log(error)
-    }
+    const data = await fetchPostMessage(message)
+    socketInstance.emit('send_message', data)
+    setChat(prevChat => [...prevChat, data])
+    setMessage('')
   }
 
   useEffect(() => {
@@ -80,7 +54,7 @@ const ChatGroup = () => {
             ))}
           </div>
 
-          <div className='flex bg-gray-300 p-1 rounded-full gap-2 w-full items-center justify-center'>
+          <div className='flex bg-gray-300 p-1 rounded-full gap-2 w-full items-center md:justify-center justify-start'>
             <button
               onClick={sendMessage}
               className='bg-blue-700 rounded-full p-1'
@@ -91,7 +65,7 @@ const ChatGroup = () => {
               value={message}
               onChange={e => setMessage(e.target.value)}
               placeholder='Mensaje'
-              className='rounded-lg p-1 w-[250px]'
+              className='rounded-lg p-1 w-[300px]'
             />
           </div>
 

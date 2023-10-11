@@ -38,7 +38,34 @@ const fetchUserbyId = async (id) => {
   }
 }
 
+const fetchUserbyName = async (name) => {
+  try {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      console.error('Token not found')
+      return null
+    }
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    }
+    const response = await clienteAxios(`usuarios/buscar/${name}`, config)
+
+    if (response.status !== 200) {
+      console.error(`Error with status code: ${response.status}`)
+      return null
+    }
+    return response.data
+  } catch (error) {
+    console.error('Network or request error:', error)
+    return null
+  }
+}
+
 export {
   fetchUsers,
-  fetchUserbyId
+  fetchUserbyId,
+  fetchUserbyName
 }

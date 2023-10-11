@@ -1,7 +1,9 @@
 import React from 'react'
 import { LocationIcon } from '../assets/icons/iconos'
+import useAuth from '../hooks/useAuth'
 
 export const CardPerfilDinamic = ({ usuario }) => {
+  const { color } = useAuth()
   return (
 
     <div className='bg-white dark:bg-primary p-4 shadow w-full md:h-[350px] rounded md:w-[270px] md:flex flex-col gap-5 text-gray-700 dark:text-font1 '>
@@ -31,7 +33,7 @@ export const CardPerfilDinamic = ({ usuario }) => {
       </div>
       <div className=' flex gap-10'>
         <div className='flex gap-2'>
-          <LocationIcon color='white' />
+          <LocationIcon color={color} />
           <p>Pais:</p>
         </div>
 

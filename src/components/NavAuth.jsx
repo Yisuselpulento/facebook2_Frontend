@@ -1,28 +1,11 @@
 import { Link } from 'react-router-dom'
-import { Sun, Moon, Question, SessionOut } from '../assets/icons/iconos'
-import { useState, useEffect } from 'react'
+import { OffIcon } from '../assets/icons/iconos'
 import SearchComponent from './SearchComponent'
 import useAuth from '../hooks/useAuth'
 import { buttons } from '../helpers/TailwindVar'
+import ButtonTheme from './ButtonTheme'
 
 export const NavAuth = () => {
-  const [theme, setTheme] = useState(() => {
-    if (window.matchMedia('(prefers-color-shceme: dark)').matches) {
-      return 'light'
-    }
-    return 'dark'
-  })
-
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.querySelector('html').classList.add('dark')
-    } else { document.querySelector('html').classList.remove('dark') }
-  }, [theme])
-
-  const handleChangeMode = () => {
-    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark')
-  }
-
   const { setAuth } = useAuth()
 
   const handleSesionClose = () => {
@@ -31,7 +14,7 @@ export const NavAuth = () => {
   }
 
   return (
-    <div className='bg-white dark:bg-primary shadow h-[50px] flex md:justify-between justify-center items-center p-3'>
+    <div className='bg-white dark:bg-primary gap-4 shadow h-[50px] flex md:justify-between justify-center items-center p-3'>
       <Link
         to='/home'
         className='text-2xl font-bold text-blue-500 md:flex hidden'
@@ -42,18 +25,13 @@ export const NavAuth = () => {
         <SearchComponent />
       </div>
 
-      <div className='hidden md:flex gap-5'>
-        <button onClick={handleChangeMode}>
-          {theme === 'light' ? <Moon color='white' /> : <Sun color='white' />}
-        </button>
-        <button>
-          <Question color='white' />
-        </button>
+      <div className='flex  gap-3'>
+        <ButtonTheme />
         <button
           onClick={handleSesionClose}
-          className={`text-center px-3 rounded py-1 font-bold flex gap-2 ${buttons} flex items-center`}
-        >Out
-          <SessionOut color='white' />
+          className={`p-1 rounded-full  gap-2 ${buttons}  `}
+        >
+          <OffIcon color='white' />
         </button>
       </div>
 

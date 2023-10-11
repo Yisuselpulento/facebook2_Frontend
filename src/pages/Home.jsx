@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { fetchPost } from '../services/postsFetch'
 import { Aside } from '../components/Aside'
 import useAuth from '../hooks/useAuth'
+import Spinner from '../components/Spinner'
 
 export const Home = () => {
   const { globalPost, setGlobalPost } = useAuth()
@@ -31,7 +32,9 @@ export const Home = () => {
             </div>
           ))
 
-          : <p className='text-font1'>Cargando...</p>}
+          : <div className='flex items-center justify-center'>
+            <Spinner />
+            </div>}
 
       </div>
 

@@ -6,6 +6,7 @@ const AuthUserContext = createContext()
 
 const AuthUserProvider = ({ children }) => {
   const [auth, setAuth] = useState({})
+  const [color, setColor] = useState('white')
   const [cargando, setCargando] = useState(true)
   const [modalEdit, setModalEdit] = useState(false)
   const [modalChat, setModalChat] = useState(false)
@@ -64,7 +65,9 @@ const AuthUserProvider = ({ children }) => {
         modalChat,
         setGlobalPost,
         globalPost,
-        updateUser
+        updateUser,
+        color,
+        setColor
 
       }}
     >

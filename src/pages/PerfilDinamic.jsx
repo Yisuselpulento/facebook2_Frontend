@@ -5,6 +5,7 @@ import { fetchPostUser } from '../services/postsFetch.js'
 import { useParams } from 'react-router-dom'
 import { fetchUserbyId } from '../services/userFetch.js'
 import { CardPerfilDinamic } from '../components/CardPerfilDinamic'
+import Spinner from '../components/Spinner'
 
 export const PerfilDinamic = () => {
   const [postUser, setpostUser] = useState([])
@@ -26,7 +27,7 @@ export const PerfilDinamic = () => {
 
   return (
 
-    <div className='flex gap-10 justify-center items-center md:justify-normal md:items-start  flex-col md:flex-row'>
+    <div className='flex gap-10 justify-center  md:justify-normal md:items-start  flex-col md:flex-row'>
       <CardPerfilDinamic usuario={usuario} />
       <div>
         <HeadInputPost placeholder='Dejale un post' />
@@ -37,7 +38,9 @@ export const PerfilDinamic = () => {
             </div>
           ))
 
-          : <p className='text-font1'>Cargando...</p>}
+          : <div className='flex items-center justify-center'>
+            <Spinner />
+          </div>}
 
       </div>
 
