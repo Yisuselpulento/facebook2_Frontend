@@ -26,7 +26,7 @@ export default function SearchComponent () {
           type='text'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className=' w-[300px] md:w-[400px] px-3 py-2 text-primary bg-gray-200 dark:bg-white border rounded-full focus:border-blue-700 focus:ring-blue-700 focus:outline-none focus:ring focus:ring-opacity-40 h-[35px]'
+          className=' w-[200px] md:w-[400px] px-3 py-2 text-primary bg-gray-200 dark:bg-white border rounded-full focus:border-blue-700 focus:ring-blue-700 focus:outline-none focus:ring focus:ring-opacity-40 h-[35px]'
           placeholder='Search...'
         />
         {searchResults.length > 0 && (
