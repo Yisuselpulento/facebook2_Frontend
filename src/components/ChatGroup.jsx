@@ -4,7 +4,6 @@ import io from 'socket.io-client'
 import { MsjComponent } from './MsjComponent'
 import clienteAxios from '../config/clienteAxios'
 import useAuth from '../hooks/useAuth'
-import Recomendaciones from './Recomendaciones'
 
 const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
 
@@ -49,7 +48,6 @@ const ChatGroup = () => {
 
       const { data } = await clienteAxios.post('messages', { content: message }, config)
       socketInstance.emit('send_message', data)
-      console.log(data)
       setChat(prevChat => [...prevChat, data])
       setMessage('')
     } catch (error) {
@@ -76,7 +74,7 @@ const ChatGroup = () => {
       <div className='flex flex-col justify-between p-3 w-full dark:bg-primary rounded-lg'>
 
         <div className='flex flex-col gap-3'>
-          <div className='h-[400px] bg-gray-100 p-3 flex flex-col gap-2 overflow-auto'>
+          <div className='h-[420px] p-3 flex flex-col gap-2 overflow-auto'>
             {chat.map((msg, index) => (
               <MsjComponent msg={msg} key={index} />
             ))}
@@ -102,7 +100,7 @@ const ChatGroup = () => {
       </div>
       <button
         onClick={() => setModalChat(!modalChat)}
-        className='bg-blue-700 rounded-full p-3 md:p-4 fixed bottom-4 right-4'
+        className='bg-blue-700 rounded-full p-2 md:p-4 fixed bottom-4 right-4'
       >
         <ChatIcon color='white' />
       </button>
