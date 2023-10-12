@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom'
 const CardComments = ({ comment, removeComment }) => {
   const { auth } = useAuth()
 
+  const { author, content, _id } = comment
+
   const shouldShowDeleteButton = auth._id === comment.author._id
 
   const deleteComment = () => {
-    handleDeleteComment(comment._id)
+    handleDeleteComment(_id)
       .then(() => {
-        removeComment(comment._id)
+        removeComment(_id)
       })
       .catch(error => {
         console.error('Hubo un error eliminando el comentario:', error)
@@ -21,10 +23,10 @@ const CardComments = ({ comment, removeComment }) => {
     <div className='flex flex-col gap-2'>
       <div className='flex justify-between'>
         <Link
-          to={`perfil/${comment.author._id}`}
+          to={`perfil/${author._id}`}
           className='text-font2 font-bold'
         >
-          {comment.author.nombre}
+          {author.nombre}
         </Link>
         {shouldShowDeleteButton &&
           <button
@@ -34,7 +36,7 @@ const CardComments = ({ comment, removeComment }) => {
             Borrar
           </button>}
       </div>
-      <p className='bg-gray-100 dark:bg-neutral-800 p-2 rounded'>{comment.content}</p>
+      <p className='bg-gray-100 dark:bg-neutral-800 p-2 rounded'>{content}</p>
     </div>
   )
 }

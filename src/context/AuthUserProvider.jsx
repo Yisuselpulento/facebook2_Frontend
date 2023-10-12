@@ -11,6 +11,7 @@ const AuthUserProvider = ({ children }) => {
   const [modalEdit, setModalEdit] = useState(false)
   const [modalChat, setModalChat] = useState(false)
   const [globalPost, setGlobalPost] = useState([])
+  const [postPerfil, setPostPerfil] = useState([])
   const navigate = useNavigate()
 
   const updateUser = (updatedData) => {
@@ -67,7 +68,9 @@ const AuthUserProvider = ({ children }) => {
         globalPost,
         updateUser,
         color,
-        setColor
+        setColor,
+        setPostPerfil,
+        postPerfil
 
       }}
     >

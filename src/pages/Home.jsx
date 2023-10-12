@@ -34,7 +34,7 @@ export const Home = () => {
 
           : <div className='flex items-center justify-center'>
             <Spinner />
-          </div>}
+            </div>}
 
       </div>
 

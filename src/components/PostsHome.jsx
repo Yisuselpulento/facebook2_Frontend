@@ -21,7 +21,7 @@ export const PostsHome = ({ post }) => {
   useEffect(() => {
     const userHasLiked = likes.some(like => like.userId === auth._id)
     setLike(userHasLiked)
-  }, [])
+  }, [likes])
 
   const handleChangeLike = async () => {
     const data = await likePostFetch(post._id)
@@ -45,7 +45,6 @@ export const PostsHome = ({ post }) => {
 
   const submitComment = async () => {
     const newComment = await handlePostComment(post._id, comentario)
-    console.log(newComment)
 
     if (newComment) {
       const augmentedComment = {
@@ -72,6 +71,9 @@ export const PostsHome = ({ post }) => {
     const updatedComments = postComments.filter(c => c._id !== commentId)
     setPostComments(updatedComments)
   }
+
+  const { author, content } = post
+
   return (
 
     <div className='flex flex-col gap-3 text-gray-700 dark:text-font1'>
@@ -81,15 +83,15 @@ export const PostsHome = ({ post }) => {
             width={100}
             height={100}
             className='w-12 h-12 rounded-full object-cover border border-gray-300 dark:border-gray-700'
-            src={`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/avatar/${post.author.image}`}
+            src={`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/avatar/${author.image}`}
           />
         </div>
         <div className='flex justify-between text-sm w-full'>
           <Link
-            to={`/perfil/${post.author._id}`}
+            to={`/perfil/${author._id}`}
             className='font-bold'
           >
-            {post.author.nombre}
+            {author.nombre}
           </Link>
           {shouldShowDeleteButton && (
             <button
@@ -103,7 +105,7 @@ export const PostsHome = ({ post }) => {
 
       </div>
       <div className='bg-gray-100 dark:bg-neutral-800 rounded-lg p-2'>
-        {post.content}
+        {content}
       </div>
       <div className='flex gap-2'>
         <button onClick={handleChangeLike}>
