@@ -10,7 +10,7 @@ export const NavAuth = () => {
 
   const handleSesionClose = () => {
     setAuth({})
-    localStorage.removeItem('token')
+    window.localStorage.removeItem('token')
   }
 
   return (

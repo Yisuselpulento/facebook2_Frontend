@@ -16,7 +16,6 @@ const Perfil = () => {
       const data = await fetchPostUser(auth._id)
       if (Array.isArray(data)) {
         setpostUser(data)
-        console.log(data)
       } else {
         console.error('Unexpected data:', data)
       }

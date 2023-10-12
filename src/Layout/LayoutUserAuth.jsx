@@ -21,7 +21,7 @@ export const LayoutUserAuth = () => {
         ? <div className='flex justify-center  items-center min-h-[800px] '> <Spinner /></div>
 
         : <div>
-          {auth._id
+          {auth?._id
             ? (
               <div className=' flex flex-col gap-10'>
                 <header>
@@ -81,7 +81,7 @@ export const LayoutUserAuth = () => {
             <Modal isOpen={modalEdit} onClose={() => setModalEdit(false)}>
               <ModalEdit />
             </Modal>}
-        </div>}
+          </div>}
 
     </div>
   )

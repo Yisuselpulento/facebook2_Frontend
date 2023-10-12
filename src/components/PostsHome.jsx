@@ -16,7 +16,9 @@ export const PostsHome = ({ post }) => {
   const [mostrarLikes, setMostrarLikes] = useState(false)
   const [postComments, setPostComments] = useState([])
 
-  const shouldShowDeleteButton = post.author._id === auth._id
+  const { author, content } = post
+
+  const shouldShowDeleteButton = author._id === auth._id
 
   useEffect(() => {
     const userHasLiked = likes.some(like => like.userId === auth._id)
@@ -71,8 +73,6 @@ export const PostsHome = ({ post }) => {
     const updatedComments = postComments.filter(c => c._id !== commentId)
     setPostComments(updatedComments)
   }
-
-  const { author, content } = post
 
   return (
 

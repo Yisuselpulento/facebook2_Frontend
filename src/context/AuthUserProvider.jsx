@@ -2,7 +2,7 @@ import { useState, useEffect, createContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import clienteAxios from '../config/clienteAxios'
 
-const AuthUserContext = createContext()
+const AuthUserContext = createContext({})
 
 const AuthUserProvider = ({ children }) => {
   const [auth, setAuth] = useState({})
@@ -23,7 +23,7 @@ const AuthUserProvider = ({ children }) => {
 
   useEffect(() => {
     const autenticarUsuario = async () => {
-      const token = localStorage.getItem('token')
+      const token = window.localStorage.getItem('token')
       if (!token) {
         setCargando(false)
         return
@@ -57,7 +57,7 @@ const AuthUserProvider = ({ children }) => {
     <AuthUserContext.Provider
       value={{
         auth,
-        setAuth,
+        setAuth, // no recomendable exportar funciones de useState
         cargando,
         cerrarSesionAuth,
         setModalEdit,
