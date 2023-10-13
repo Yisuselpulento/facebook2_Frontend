@@ -1,25 +1,12 @@
 import { PostsHome } from '../components/PostsHome'
 import HeadInputPost from '../components/HeadInputPost'
-import { useState, useEffect } from 'react'
-import { fetchPost } from '../services/postsFetch'
 import { Aside } from '../components/Aside'
-import useAuth from '../hooks/useAuth'
 import Spinner from '../components/Spinner'
+import usePosts from '../hooks/usePosts'
 
 export const Home = () => {
-  const { globalPost, setGlobalPost } = useAuth()
-  const [cargando, setCargando] = useState(true)
-
-  useEffect(() => {
-    const getPost = async () => {
-      const data = await fetchPost()
-      setGlobalPost(data)
-      setCargando(false)
-    }
-
-    getPost()
-  }, [])
-
+  const { globalPost, cargando } = usePosts()
+  console.log(globalPost)
   return (
     <div className='flex gap-8'>
       <Aside />
@@ -34,8 +21,7 @@ export const Home = () => {
 
           : <div className='flex items-center justify-center'>
             <Spinner />
-            </div>}
-
+          </div>}
       </div>
 
     </div>

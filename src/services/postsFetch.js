@@ -54,24 +54,6 @@ const fetchPost = async () => {
   }
 }
 
-const fetchPostUser = async (id) => {
-  try {
-    const token = localStorage.getItem('token')
-    if (!token) return
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    }
-
-    const { data } = await clienteAxios(`posts/${id}`, config)
-    return data
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 const likePostFetch = async (id) => {
   try {
     const token = localStorage.getItem('token')
@@ -93,6 +75,5 @@ export {
   Postear,
   fetchPost,
   deletePost,
-  fetchPostUser,
   likePostFetch
 }

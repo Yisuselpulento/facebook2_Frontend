@@ -1,49 +1,36 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { PostsHome } from '../components/PostsHome'
 import HeadInputPost from '../components/HeadInputPost'
-import { fetchPostUser } from '../services/postsFetch.js'
 import { useParams } from 'react-router-dom'
-import { fetchUserbyId } from '../services/userFetch.js'
 import { CardPerfilDinamic } from '../components/CardPerfilDinamic'
 import Spinner from '../components/Spinner'
+import usePosts from '../hooks/usePosts'
+import useAuth from '../hooks/useAuth'
 
 export const PerfilDinamic = () => {
-  const [postUser, setpostUser] = useState([])
-  const [cargando, setcargando] = useState(true)
-  const [usuario, setUsuario] = useState('')
-  const user = useParams()
+  const { userId } = useParams()
+  const { globalPost } = usePosts()
+  const { auth } = useAuth()
 
-  useEffect(() => {
-    const getUser = async () => {
-      const newUser = await fetchUserbyId(user.id)
-      setUsuario(newUser)
-      const data = await fetchPostUser(newUser._id)
-      setpostUser(data)
-      setcargando(false)
-    }
+  const userPosts = globalPost.filter(post => post.author._id === userId)
 
-    getUser()
-  }, [])
-
+  console.log(userPosts)
+  console.log(userId)
   return (
-
     <div className='flex gap-10 justify-center  md:justify-normal md:items-start  flex-col md:flex-row'>
-      <CardPerfilDinamic usuario={usuario} />
+      <CardPerfilDinamic usuario={auth} />
       <div>
         <HeadInputPost placeholder='Dejale un post' />
-        {!cargando
-          ? postUser.map(post => (
-            <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-4 mb-6  '>
+        {userPosts.length > 0
+          ? userPosts.map(post => (
+            <div key={post._id} className='bg-white shadow dark:bg-primary rounded p-4 mb-6'>
               <PostsHome post={post} />
             </div>
           ))
-
           : <div className='flex items-center justify-center'>
             <Spinner />
           </div>}
-
       </div>
-
     </div>
   )
 }

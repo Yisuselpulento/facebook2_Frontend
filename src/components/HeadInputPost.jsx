@@ -3,14 +3,17 @@ import { buttons } from '../helpers/TailwindVar'
 import { Img } from '../assets/icons/iconos'
 import useAuth from '../hooks/useAuth'
 import { Postear } from '../services/postsFetch'
+import usePosts from '../hooks/usePosts'
 
 const HeadInputPost = ({ placeholder }) => {
   const [inputPost, setInputPost] = useState('')
-  const { auth, setGlobalPost } = useAuth()
+  const { auth } = useAuth()
+  const { setGlobalPost } = usePosts()
 
   const handleNewPost = async () => {
     if (inputPost === '') return
     const data = await Postear(inputPost)
+    console.log(data)
     setGlobalPost(prevPosts => [data, ...prevPosts])
     setInputPost('')
   }

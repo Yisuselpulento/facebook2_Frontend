@@ -10,8 +10,6 @@ const AuthUserProvider = ({ children }) => {
   const [cargando, setCargando] = useState(true)
   const [modalEdit, setModalEdit] = useState(false)
   const [modalChat, setModalChat] = useState(false)
-  const [globalPost, setGlobalPost] = useState([])
-  const [postPerfil, setPostPerfil] = useState([])
   const navigate = useNavigate()
 
   const updateUser = (updatedData) => {
@@ -57,20 +55,16 @@ const AuthUserProvider = ({ children }) => {
     <AuthUserContext.Provider
       value={{
         auth,
-        setAuth, // no recomendable exportar funciones de useState
+        setAuth,
         cargando,
         cerrarSesionAuth,
         setModalEdit,
         modalEdit,
         setModalChat,
         modalChat,
-        setGlobalPost,
-        globalPost,
         updateUser,
         color,
-        setColor,
-        setPostPerfil,
-        postPerfil
+        setColor
 
       }}
     >
