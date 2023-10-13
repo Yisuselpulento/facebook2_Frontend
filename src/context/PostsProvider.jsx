@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect } from 'react'
 import { deletePost, fetchPost } from '../services/postsFetch'
-import { fetchComments } from '../services/commentsFetch'
+import { handlePostComment } from '../services/commentsFetch'
 
 const PostsContext = createContext({})
 
@@ -23,6 +23,31 @@ const PostsProvider = ({ children }) => {
     setGlobalPost(newArr)
   }
 
+  const submitComment = async (postId, comentario, auth) => {
+    const newComment = await handlePostComment(postId, comentario)
+
+    if (newComment) {
+      setGlobalPost(prevPosts => prevPosts.map(post => {
+        if (post._id === postId) {
+          return {
+            ...post,
+            comments: [newComment, ...post.comments]
+          }
+        }
+        return post
+      }))
+    }
+  }
+
+  const removeComment = (postId, commentId) => {
+    setGlobalPost(prevPosts =>
+      prevPosts.map(post =>
+        post._id === postId
+          ? { ...post, comments: post.comments.filter(comment => comment._id !== commentId) }
+          : post
+      )
+    )
+  }
   /*
   const handleLike = async () => {
     const data = await likePostFetch(post._id)
@@ -42,37 +67,7 @@ const PostsProvider = ({ children }) => {
     setLike(userHasLiked)
   }, [post, auth._id])
 
-  useEffect(() => {
-    const getComments = async () => {
-      const data = await fetchComments(post)
-      setPostComments(data)
-      setCargando(false)
-    }
-    getComments()
-  }, [])
-
-  const submitComment = async () => {
-    const newComment = await handlePostComment(post._id, comentario)
-
-    if (newComment) {
-      const augmentedComment = {
-        ...newComment,
-        author: {
-          _id: auth._id,
-          nombre: auth.nombre
-        }
-      }
-      setPostComments(prevComments => [...prevComments, augmentedComment])
-      setcomentario('')
-    } else {
-      console.error('Error al agregar el comentario')
-    }
-  }
-
-  const removeCommentFromState = (commentId) => {
-    const updatedComments = postComments.filter(c => c._id !== commentId)
-    setPostComments(updatedComments)
-  } */
+ */
 
   return (
     <PostsContext.Provider
@@ -80,7 +75,9 @@ const PostsProvider = ({ children }) => {
         cargando,
         setGlobalPost,
         globalPost,
-        handleDeletePost
+        handleDeletePost,
+        submitComment,
+        removeComment
         /*     setLikes,
         likes
  */

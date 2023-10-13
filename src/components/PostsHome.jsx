@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { buttons } from '../helpers/TailwindVar'
 import useAuth from '../hooks/useAuth/'
 import CardComments from './CardComments'
-import { fetchComments, handlePostComment } from '../services/commentsFetch'
+import { handlePostComment } from '../services/commentsFetch'
 import { deletePost, likePostFetch } from '../services/postsFetch'
 import { Link } from 'react-router-dom'
 import { HeartDislike, HeartLike } from '../assets/icons/iconos'
@@ -10,11 +10,11 @@ import usePosts from '../hooks/usePosts'
 
 export const PostsHome = ({ post, onDelete }) => {
   const { auth } = useAuth()
-  const { globalPost, setGlobalPost, handleDeletePost } = usePosts()
-  const [cargando, setCargando] = useState(true)
+  const { globalPost, setGlobalPost, handleDeletePost, cargando, submitComment } = usePosts()
   const [likesCount, setLikesCount] = useState(post.likes ? post.likes.length : 0)
+  const [comentario, setComentario] = useState('')
 
-  const { author, content, likes, _id } = post
+  const { author, content, likes, _id, comments } = post
 
   const shouldShowDeleteButton = author._id === auth._id
 
@@ -89,28 +89,28 @@ export const PostsHome = ({ post, onDelete }) => {
         <input
           className='bg-gray-200 dark:bg-stone-800 px-2 w-full h-10'
           type='text' placeholder='Comenta'
-         /*  onChange={e => setcomentario(e.target.value)}
-          value={comentario} */
+          onChange={e => setComentario(e.target.value)}
+          value={comentario}
         />
         <button
-        /*   onClick={submitComment} */
+          onClick={() => submitComment(_id, comentario, auth)}
           className={`${buttons}rounded py-1 px-2 mt-2 md:mt-0`}
         >Enviar
         </button>
       </div>
 
-      {/*   <div className='flex flex-col gap-5'>
+      <div className='flex flex-col gap-5'>
         {!cargando
-          ? postComments.map(comment => (
+          ? comments.map(comment => (
 
             <CardComments
               key={comment._id} comment={comment}
-              removeComment={removeCommentFromState}
+           /*    removeComment={removeCommentFromState}  */
             />
 
           ))
           : <p>Cargando comentarios</p>}
-      </div> */}
+      </div>
 
     </div>
 

@@ -1,22 +1,22 @@
 import useAuth from '../hooks/useAuth'
+import usePosts from '../hooks/usePosts'
 import { handleDeleteComment } from '../services/commentsFetch'
 import { Link } from 'react-router-dom'
 
-const CardComments = ({ comment, removeComment }) => {
+const CardComments = ({ comment }) => {
   const { auth } = useAuth()
-
+  const { removeComment } = usePosts()
   const { author, content, _id } = comment
 
   const shouldShowDeleteButton = auth._id === comment.author._id
 
-  const deleteComment = () => {
-    handleDeleteComment(_id)
-      .then(() => {
-        removeComment(_id)
-      })
-      .catch(error => {
-        console.error('Hubo un error eliminando el comentario:', error)
-      })
+  const deleteComment = async () => {
+    try {
+      await handleDeleteComment(_id)
+      removeComment(postId, commentId)
+    } catch (error) {
+      console.error('Error al eliminar comentario:', error)
+    }
   }
 
   return (

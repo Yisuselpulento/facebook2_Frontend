@@ -20,7 +20,6 @@ export const PerfilDinamic = () => {
       const newUser = await fetchUserbyId(userId)
       setUsuario(newUser)
       setcargando(false)
-      console.log(newUser)
     }
 
     getUser()
@@ -40,7 +39,7 @@ export const PerfilDinamic = () => {
           ))
           : <div className='flex items-center justify-center'>
             <Spinner />
-            </div>}
+          </div>}
       </div>
     </div>
   )
