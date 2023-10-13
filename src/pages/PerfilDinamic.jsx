@@ -1,24 +1,35 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { PostsHome } from '../components/PostsHome'
 import HeadInputPost from '../components/HeadInputPost'
 import { useParams } from 'react-router-dom'
 import { CardPerfilDinamic } from '../components/CardPerfilDinamic'
 import Spinner from '../components/Spinner'
 import usePosts from '../hooks/usePosts'
-import useAuth from '../hooks/useAuth'
+import { fetchUserbyId } from '../services/userFetch'
 
 export const PerfilDinamic = () => {
   const { userId } = useParams()
   const { globalPost } = usePosts()
-  const { auth } = useAuth()
+  const [usuario, setUsuario] = useState()
+  const [cargando, setcargando] = useState(true)
 
   const userPosts = globalPost.filter(post => post.author._id === userId)
 
-  console.log(userPosts)
-  console.log(userId)
+  useEffect(() => {
+    const getUser = async () => {
+      const newUser = await fetchUserbyId(userId)
+      setUsuario(newUser)
+      setcargando(false)
+      console.log(newUser)
+    }
+
+    getUser()
+  }, [])
+
+  if (cargando) return 'cargando'
   return (
     <div className='flex gap-10 justify-center  md:justify-normal md:items-start  flex-col md:flex-row'>
-      <CardPerfilDinamic usuario={auth} />
+      <CardPerfilDinamic usuario={usuario} />
       <div>
         <HeadInputPost placeholder='Dejale un post' />
         {userPosts.length > 0
@@ -29,7 +40,7 @@ export const PerfilDinamic = () => {
           ))
           : <div className='flex items-center justify-center'>
             <Spinner />
-          </div>}
+            </div>}
       </div>
     </div>
   )
