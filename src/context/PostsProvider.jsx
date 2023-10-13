@@ -23,23 +23,24 @@ const PostsProvider = ({ children }) => {
     setGlobalPost(newArr)
   }
 
-  const submitComment = async (postId, comentario, auth) => {
-    const newComment = await handlePostComment(postId, comentario)
-
-    if (newComment) {
-      setGlobalPost(prevPosts => prevPosts.map(post => {
-        if (post._id === postId) {
-          return {
-            ...post,
-            comments: [newComment, ...post.comments]
+  const newComment = async (postId, comentario) => {
+    const Comentario = await handlePostComment(postId, comentario)
+    if (Comentario) {
+      setGlobalPost(prevPosts =>
+        prevPosts.map(post => {
+          if (post._id === postId) {
+            return {
+              ...post,
+              comments: [Comentario, ...post.comments]
+            }
           }
-        }
-        return post
-      }))
+          return post
+        })
+      )
     }
   }
 
-  const removeComment = (postId, commentId) => {
+  const removeCommentFromState = (postId, commentId) => {
     setGlobalPost(prevPosts =>
       prevPosts.map(post =>
         post._id === postId
@@ -48,6 +49,7 @@ const PostsProvider = ({ children }) => {
       )
     )
   }
+
   /*
   const handleLike = async () => {
     const data = await likePostFetch(post._id)
@@ -76,8 +78,8 @@ const PostsProvider = ({ children }) => {
         setGlobalPost,
         globalPost,
         handleDeletePost,
-        submitComment,
-        removeComment
+        newComment,
+        removeCommentFromState
         /*     setLikes,
         likes
  */

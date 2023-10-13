@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom'
 
 const CardComments = ({ comment }) => {
   const { auth } = useAuth()
-  const { removeComment } = usePosts()
-  const { author, content, _id } = comment
-
+  const { removeCommentFromState } = usePosts()
+  const { author, content, _id, post } = comment
+  console.log(comment)
   const shouldShowDeleteButton = auth._id === comment.author._id
 
   const deleteComment = async () => {
     try {
       await handleDeleteComment(_id)
-      removeComment(postId, commentId)
+      removeCommentFromState(post, _id)
     } catch (error) {
       console.error('Error al eliminar comentario:', error)
     }

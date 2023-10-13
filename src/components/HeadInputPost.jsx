@@ -13,7 +13,6 @@ const HeadInputPost = ({ placeholder }) => {
   const handleNewPost = async () => {
     if (inputPost === '') return
     const data = await Postear(inputPost)
-    console.log(data)
     setGlobalPost(prevPosts => [data, ...prevPosts])
     setInputPost('')
   }

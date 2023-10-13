@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { buttons } from '../helpers/TailwindVar'
 import useAuth from '../hooks/useAuth/'
 import CardComments from './CardComments'
-import { handlePostComment } from '../services/commentsFetch'
-import { deletePost, likePostFetch } from '../services/postsFetch'
+import { likePostFetch } from '../services/postsFetch'
 import { Link } from 'react-router-dom'
 import { HeartDislike, HeartLike } from '../assets/icons/iconos'
 import usePosts from '../hooks/usePosts'
 
 export const PostsHome = ({ post, onDelete }) => {
   const { auth } = useAuth()
-  const { globalPost, setGlobalPost, handleDeletePost, cargando, submitComment } = usePosts()
-  const [likesCount, setLikesCount] = useState(post.likes ? post.likes.length : 0)
+  const { handleDeletePost, cargando, newComment } = usePosts()
   const [comentario, setComentario] = useState('')
+  const [likesCount, setLikesCount] = useState(post.likes ? post.likes.length : 0)
 
   const { author, content, likes, _id, comments } = post
 
@@ -43,7 +42,7 @@ export const PostsHome = ({ post, onDelete }) => {
           </Link>
           {shouldShowDeleteButton && (
             <button
-              onClick={() => onDelete ? onDelete(_id) : handleDeletePost(_id)}
+              onClick={() => handleDeletePost(_id)}
               className='bg-red-400 text-white hover:bg-red-500 px-2 rounded'
             >
               Borrar
@@ -93,9 +92,13 @@ export const PostsHome = ({ post, onDelete }) => {
           value={comentario}
         />
         <button
-          onClick={() => submitComment(_id, comentario, auth)}
+          onClick={() => {
+            newComment(_id, comentario)
+            setComentario('')
+          }}
           className={`${buttons}rounded py-1 px-2 mt-2 md:mt-0`}
-        >Enviar
+        >
+          Enviar
         </button>
       </div>
 

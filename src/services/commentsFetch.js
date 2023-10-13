@@ -39,7 +39,7 @@ const handlePostComment = async (id, comentaio) => {
 
 const handleDeleteComment = async (id) => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {
