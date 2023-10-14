@@ -71,14 +71,13 @@ const PostsProvider = ({ children }) => {
   const handleLike = async (postId) => {
     try {
       const responseData = await likePostFetch(postId)
-      console.log(responseData)
       if (responseData) {
         setGlobalPost(prevPosts =>
           prevPosts.map(post => {
             if (post._id === postId) {
               return {
                 ...post,
-                likes: responseData.likesCount,
+                likes: responseData.likesUsers || [],
                 hasLiked: responseData.hasLiked
               }
             }

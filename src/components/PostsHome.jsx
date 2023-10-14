@@ -13,7 +13,7 @@ export const PostsHome = ({ post }) => {
   const [mostrarLikes, setMostrarLikes] = useState(false)
 
   const { author, content, _id, likes, comments, hasLiked } = post
-  const likesCount = post.likes.length
+  const likesCount = likes?.length || 0
 
   const shouldShowDeleteButton = author._id === auth._id
 
@@ -63,7 +63,7 @@ export const PostsHome = ({ post }) => {
           <p className='cursor pointer outline-2'>{likesCount}</p>
           {mostrarLikes && (
             <div className='absolute z-10 mt-6 p-4 bg-black rounded shadow-xl transition-opacity opacity-100'>
-              {likes.map((like, index) => (
+              {likes?.map((like, index) => (
                 <div key={index} className='flex items-center gap-2'>
                   <img
                     width={20}
