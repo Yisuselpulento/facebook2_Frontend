@@ -8,7 +8,7 @@ import usePosts from '../hooks/usePosts'
 
 export const PostsHome = ({ post }) => {
   const { auth } = useAuth()
-  const { handleDeletePost, cargando, newComment, handleLike } = usePosts()
+  const { handleDeletePost, cargandoHeart, cargando, newComment, handleLike } = usePosts()
   const [comentario, setComentario] = useState('')
   const [mostrarLikes, setMostrarLikes] = useState(false)
 
@@ -16,7 +16,7 @@ export const PostsHome = ({ post }) => {
   const likesCount = likes?.length || 0
 
   const shouldShowDeleteButton = author._id === auth._id
-
+  console.log(cargandoHeart)
   return (
 
     <div className='flex flex-col gap-3 text-gray-700 dark:text-font1'>
@@ -52,9 +52,15 @@ export const PostsHome = ({ post }) => {
       </div>
 
       <div className='flex gap-2'>
-        <button onClick={() => handleLike(_id)}>
-          {hasLiked ? <HeartLike color='red' /> : <HeartDislike />}
-        </button>
+        {cargandoHeart
+          ? (
+            <p>cargando...</p>
+            )
+          : (
+            <button onClick={() => handleLike(_id)}>
+              {hasLiked ? <HeartLike color='red' /> : <HeartDislike />}
+            </button>
+            )}
 
         <div
           onMouseEnter={() => setMostrarLikes(true)}

@@ -8,6 +8,7 @@ const PostsContext = createContext({})
 const PostsProvider = ({ children }) => {
   const [cargando, setCargando] = useState(true)
   const [globalPost, setGlobalPost] = useState([])
+  const [cargandoHeart, setCargandoHeart] = useState(true)
   const { auth } = useAuth()
 
   useEffect(() => {
@@ -23,10 +24,11 @@ const PostsProvider = ({ children }) => {
         })
 
         setGlobalPost(updatedPosts)
-        setCargando(false)
       } catch (error) {
         console.error('Error al obtener los posts:', error)
+      } finally {
         setCargando(false)
+        setCargandoHeart(false)
       }
     }
 
@@ -69,24 +71,45 @@ const PostsProvider = ({ children }) => {
   // objeto like
 
   const handleLike = async (postId) => {
+    setGlobalPost(prevPosts =>
+      prevPosts.map(post => {
+        if (post._id === postId) {
+          const hasLiked = !post.hasLiked
+          const updatedLikes = hasLiked
+            ? [...post.likes, { userId: auth._id }]
+            : post.likes.filter(like => like.userId !== auth._id)
+
+          return {
+            ...post,
+            likes: updatedLikes,
+            hasLiked
+          }
+        }
+        return post
+      })
+    )
+
     try {
-      const responseData = await likePostFetch(postId)
-      if (responseData) {
-        setGlobalPost(prevPosts =>
-          prevPosts.map(post => {
-            if (post._id === postId) {
-              return {
-                ...post,
-                likes: responseData.likesUsers || [],
-                hasLiked: responseData.hasLiked
-              }
-            }
-            return post
-          })
-        )
-      }
+      await likePostFetch(postId)
     } catch (error) {
       console.error('Error al dar like:', error)
+      setGlobalPost(prevPosts =>
+        prevPosts.map(post => {
+          if (post._id === postId) {
+            const hasLiked = !post.hasLiked
+            const updatedLikes = hasLiked
+              ? [...post.likes, { userId: auth._id }]
+              : post.likes.filter(like => like.userId !== auth._id)
+
+            return {
+              ...post,
+              likes: updatedLikes,
+              hasLiked
+            }
+          }
+          return post
+        })
+      )
     }
   }
 
@@ -101,7 +124,8 @@ const PostsProvider = ({ children }) => {
         handleDeletePost,
         newComment,
         removeCommentFromState,
-        handleLike
+        handleLike,
+        cargandoHeart
 
       }}
     >
