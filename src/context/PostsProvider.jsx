@@ -31,7 +31,7 @@ const PostsProvider = ({ children }) => {
     }
 
     getPost()
-  }, [auth._id])
+  }, [auth?._id])
 
   const handleDeletePost = (id) => {
     deletePost(id)
