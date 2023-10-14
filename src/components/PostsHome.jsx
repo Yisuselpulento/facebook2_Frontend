@@ -2,24 +2,20 @@ import React, { useState } from 'react'
 import { buttons } from '../helpers/TailwindVar'
 import useAuth from '../hooks/useAuth/'
 import CardComments from './CardComments'
-import { likePostFetch } from '../services/postsFetch'
 import { Link } from 'react-router-dom'
 import { HeartDislike, HeartLike } from '../assets/icons/iconos'
 import usePosts from '../hooks/usePosts'
 
-export const PostsHome = ({ post, onDelete }) => {
+export const PostsHome = ({ post }) => {
   const { auth } = useAuth()
-  const { handleDeletePost, cargando, newComment } = usePosts()
+  const { handleDeletePost, cargando, newComment, handleLike } = usePosts()
   const [comentario, setComentario] = useState('')
-  const [likesCount, setLikesCount] = useState(post.likes ? post.likes.length : 0)
+  const [mostrarLikes, setMostrarLikes] = useState(false)
 
-  const { author, content, likes, _id, comments } = post
+  const { author, content, _id, likes, comments, hasLiked } = post
+  const likesCount = post.likes.length
 
   const shouldShowDeleteButton = author._id === auth._id
-
-  /*
-
-  const currentPostLikes = likes.filter(like => like.postId === post._id) */
 
   return (
 
@@ -54,9 +50,10 @@ export const PostsHome = ({ post, onDelete }) => {
       <div className='bg-gray-100 dark:bg-neutral-800 rounded-lg p-2'>
         {content}
       </div>
-      {/*    <div className='flex gap-2'>
-        <button onClick={handleLike}>
-          {like ? <HeartLike color='red' /> : <HeartDislike />}
+
+      <div className='flex gap-2'>
+        <button onClick={() => handleLike(_id)}>
+          {hasLiked ? <HeartLike color='red' /> : <HeartDislike />}
         </button>
 
         <div
@@ -66,7 +63,7 @@ export const PostsHome = ({ post, onDelete }) => {
           <p className='cursor pointer outline-2'>{likesCount}</p>
           {mostrarLikes && (
             <div className='absolute z-10 mt-6 p-4 bg-black rounded shadow-xl transition-opacity opacity-100'>
-              {currentPostLikes.map((like, index) => (
+              {likes.map((like, index) => (
                 <div key={index} className='flex items-center gap-2'>
                   <img
                     width={20}
@@ -81,7 +78,7 @@ export const PostsHome = ({ post, onDelete }) => {
             </div>
           )}
         </div>
-      </div> */}
+      </div>
 
       <div className='md:flex gap-1 items-center'>
 
@@ -108,7 +105,6 @@ export const PostsHome = ({ post, onDelete }) => {
 
             <CardComments
               key={comment._id} comment={comment}
-           /*    removeComment={removeCommentFromState}  */
             />
 
           ))

@@ -7,7 +7,6 @@ const CardComments = ({ comment }) => {
   const { auth } = useAuth()
   const { removeCommentFromState } = usePosts()
   const { author, content, _id, post } = comment
-  console.log(comment)
   const shouldShowDeleteButton = auth._id === comment.author._id
 
   const deleteComment = async () => {

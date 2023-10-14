@@ -1,21 +1,37 @@
 import { useState, createContext, useEffect } from 'react'
-import { deletePost, fetchPost } from '../services/postsFetch'
+import { deletePost, fetchPost, likePostFetch } from '../services/postsFetch'
 import { handlePostComment } from '../services/commentsFetch'
+import useAuth from '../hooks/useAuth'
 
 const PostsContext = createContext({})
 
 const PostsProvider = ({ children }) => {
   const [cargando, setCargando] = useState(true)
   const [globalPost, setGlobalPost] = useState([])
+  const { auth } = useAuth()
 
   useEffect(() => {
     const getPost = async () => {
-      const data = await fetchPost()
-      setGlobalPost(data)
-      setCargando(false)
+      try {
+        const data = await fetchPost()
+        const updatedPosts = data.map(post => {
+          const hasLiked = post.likes && post.likes.some(like => like.userId === auth._id)
+          return {
+            ...post,
+            hasLiked
+          }
+        })
+
+        setGlobalPost(updatedPosts)
+        setCargando(false)
+      } catch (error) {
+        console.error('Error al obtener los posts:', error)
+        setCargando(false)
+      }
     }
+
     getPost()
-  }, [])
+  }, [auth._id])
 
   const handleDeletePost = (id) => {
     deletePost(id)
@@ -50,26 +66,32 @@ const PostsProvider = ({ children }) => {
     )
   }
 
-  /*
-  const handleLike = async () => {
-    const data = await likePostFetch(post._id)
-    if (data && data.likesCount !== undefined) {
-      setLike(data.hasLiked)
-      setLikesCount(data.likesCount)
-      if (data.hasLiked) {
-        setLikes(prevLikes => [...prevLikes, { userId: auth._id, userName: auth.nombre, userImage: auth.image }])
-      } else {
-        setLikes(prevLikes => prevLikes.filter(like => like.userId !== auth._id))
+  // objeto like
+
+  const handleLike = async (postId) => {
+    try {
+      const responseData = await likePostFetch(postId)
+      console.log(responseData)
+      if (responseData) {
+        setGlobalPost(prevPosts =>
+          prevPosts.map(post => {
+            if (post._id === postId) {
+              return {
+                ...post,
+                likes: responseData.likesCount,
+                hasLiked: responseData.hasLiked
+              }
+            }
+            return post
+          })
+        )
       }
+    } catch (error) {
+      console.error('Error al dar like:', error)
     }
   }
 
-  useEffect(() => {
-    const userHasLiked = post.likes && post.likes.some(like => like.userId === auth._id)
-    setLike(userHasLiked)
-  }, [post, auth._id])
-
- */
+  // objeto like
 
   return (
     <PostsContext.Provider
@@ -79,10 +101,9 @@ const PostsProvider = ({ children }) => {
         globalPost,
         handleDeletePost,
         newComment,
-        removeCommentFromState
-        /*     setLikes,
-        likes
- */
+        removeCommentFromState,
+        handleLike
+
       }}
     >
       {children}
