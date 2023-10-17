@@ -3,7 +3,9 @@ import useAuth from '../hooks/useAuth'
 
 export const MsjComponent = ({ msg }) => {
   const { auth } = useAuth()
-  const isSentByMe = auth._id === msg.user?._id
+  console.log(auth._id)
+  console.log(msg.user._id)
+  const isSentByMe = auth?._id === msg.user?._id
 
   return (
     <div className={`flex ${isSentByMe ? 'justify-end' : 'justify-start'} w-full px-4`}>

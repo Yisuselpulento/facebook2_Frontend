@@ -11,14 +11,13 @@ const socketInstance = io(import.meta.env.VITE_BACKEND_URL)
 const ChatGroup = () => {
   const { modalChat, setModalChat } = useAuth()
   const [chatGroup, setchatGroup] = useState(false)
-  // socket io
+  const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [chat, setChat] = useState([])
-  // socket
   useEffect(() => {
     const getMessages = async () => {
       const data = await fetchGetMessages()
-
+      console.log(data)
       setChat(data)
     }
 
@@ -26,11 +25,12 @@ const ChatGroup = () => {
   }, [])
 
   const sendMessage = async () => {
+    setIsLoading(true)
     const data = await fetchPostMessage(message)
-
+    console.log(data)
     socketInstance.emit('send_message', data)
-    setChat(prevChat => [...prevChat, data])
     setMessage('')
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -56,14 +56,12 @@ const ChatGroup = () => {
         <GroupIcon color='white' />
       </button>
       <div className='flex flex-col justify-between p-3 w-full bg-gray-100 dark:bg-primary rounded-lg'>
-
         <div className='flex flex-col gap-3'>
           <div className='h-[420px] flex flex-col gap-2 overflow-auto'>
             {chat.map((msg, index) => (
-              <MsjComponent msg={msg} key={index} />
+              <MsjComponent msg={msg} key={index} isLoading={isLoading} />
             ))}
           </div>
-
           <div className='flex bg-gray-300 p-1 rounded-full gap-2 w-full items-center md:justify-center justify-start'>
             <button
               onClick={sendMessage}
