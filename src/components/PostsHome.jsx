@@ -12,9 +12,7 @@ export const PostsHome = ({ post }) => {
   const [comentario, setComentario] = useState('')
   const [mostrarLikes, setMostrarLikes] = useState(false)
 
-  console.log(post)
-
-  const { author, content, _id, likes, comments } = post
+  const { author, content, _id, comments } = post
 
   const shouldShowDeleteButton = author._id === auth._id
 

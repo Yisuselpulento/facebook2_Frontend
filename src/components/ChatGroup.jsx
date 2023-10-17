@@ -18,6 +18,7 @@ const ChatGroup = () => {
   useEffect(() => {
     const getMessages = async () => {
       const data = await fetchGetMessages()
+
       setChat(data)
     }
 
@@ -26,6 +27,7 @@ const ChatGroup = () => {
 
   const sendMessage = async () => {
     const data = await fetchPostMessage(message)
+
     socketInstance.emit('send_message', data)
     setChat(prevChat => [...prevChat, data])
     setMessage('')

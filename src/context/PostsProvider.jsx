@@ -1,7 +1,6 @@
 import { useState, createContext, useEffect } from 'react'
 import { deletePost, fetchPost } from '../services/postsFetch'
 import { handlePostComment } from '../services/commentsFetch'
-import useAuth from '../hooks/useAuth'
 
 const PostsContext = createContext({})
 
