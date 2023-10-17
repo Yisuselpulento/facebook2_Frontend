@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { buttons } from '../helpers/TailwindVar'
-import useAuth from '../hooks/useAuth/'
+import useAuth from '../hooks/useAuth'
 import CardComments from './CardComments'
 import { Link } from 'react-router-dom'
 import { HeartDislike, HeartLike } from '../assets/icons/iconos'
@@ -8,15 +8,16 @@ import usePosts from '../hooks/usePosts'
 
 export const PostsHome = ({ post }) => {
   const { auth } = useAuth()
-  const { handleDeletePost, cargandoHeart, cargando, newComment, handleLike } = usePosts()
+  const { handleDeletePost, cargando, newComment } = usePosts()
   const [comentario, setComentario] = useState('')
   const [mostrarLikes, setMostrarLikes] = useState(false)
 
-  const { author, content, _id, likes, comments, hasLiked } = post
-  const likesCount = likes?.length || 0
+  console.log(post)
+
+  const { author, content, _id, likes, comments } = post
 
   const shouldShowDeleteButton = author._id === auth._id
-  console.log(cargandoHeart)
+
   return (
 
     <div className='flex flex-col gap-3 text-gray-700 dark:text-font1'>
@@ -51,7 +52,7 @@ export const PostsHome = ({ post }) => {
         {content}
       </div>
 
-      <div className='flex gap-2'>
+      {/*   <div className='flex gap-2'>
         {cargandoHeart
           ? (
             <p>cargando...</p>
@@ -84,7 +85,7 @@ export const PostsHome = ({ post }) => {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
 
       <div className='md:flex gap-1 items-center'>
 
