@@ -7,10 +7,12 @@ const ModalEdit = () => {
   const { modalEdit, setModalEdit, auth, updateUser } = useAuth()
   const [selectedFile, setSelectedFile] = useState(null)
   const [formData, setFormData] = useState({
-    sexo: '',
-    age: '',
-    country: ''
+    sexo: auth.sexo || '',
+    age: auth.age || '',
+    country: auth.country || ''
   })
+
+  console.log(auth)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -63,6 +65,7 @@ const ModalEdit = () => {
               id='sexo'
               value={formData.sexo}
               onChange={handleChange}
+
             >
               <option value='Superior'>Superior</option>
               <option value='Inferior'>Inferior</option>
@@ -81,6 +84,7 @@ const ModalEdit = () => {
               max='120'
               value={formData.age}
               onChange={handleChange}
+
             />
           </div>
 
@@ -92,6 +96,7 @@ const ModalEdit = () => {
               id='country'
               value={formData.country}
               onChange={handleChange}
+
             >
               <option value='Chile'>Chile</option>
               <option value='Peru'>Perú</option>
