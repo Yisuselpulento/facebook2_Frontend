@@ -42,7 +42,7 @@ export const Login = () => {
 
   return (
     <>
-      <h1 className='text-blue-600 font-black text-6xl capitalize text-center'>Iniciar sesión
+      <h1 className='text-blue-600 font-black text-4xl capitalize text-center'>Iniciar sesión
       </h1>
 
       <form
@@ -51,7 +51,7 @@ export const Login = () => {
       >
         <div className='my-5'>
           <label
-            className='uppercase text-gray-600 block text-xl font-bold'
+            className='uppercase text-gray-600 block text-lg font-bold'
             htmlFor='email'
           >Email
           </label>
@@ -59,14 +59,14 @@ export const Login = () => {
             id='email'
             type='email'
             placeholder='Email de Registro'
-            className='w-full mt-3 p-3 border  bg-gray-50'
+            className='w-full mt-1 p-2 border  bg-gray-50'
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
         </div>
         <div className='my-5'>
           <label
-            className='uppercase text-gray-600 block text-xl font-bold'
+            className='uppercase text-gray-600 block text-lg font-bold'
             htmlFor='password'
           >Password
           </label>
@@ -74,7 +74,7 @@ export const Login = () => {
             id='password'
             type='password'
             placeholder='Password de Registro'
-            className='w-full mt-3 p-3 border  bg-gray-50'
+            className='w-full mt-1 p-1 border  bg-gray-50'
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
@@ -91,7 +91,7 @@ export const Login = () => {
 
       <nav className='lg:flex lg:justify-between'>
         <Link
-          className='block text-center my-5 text-slate-500 uppercase text-sm hover:text-blue-700'
+          className='block text-center my-2 text-slate-500 uppercase text-sm hover:text-blue-700'
           to='/registrarse'
         >¿No tienes una cuenta? Regístrate
         </Link>

@@ -36,7 +36,7 @@ export const OlvidePassword = () => {
   const { msg } = alerta
   return (
     <>
-      <h1 className='text-blue-600 font-black text-6xl capitalize text-center'>Recupera tu acceso
+      <h1 className='text-blue-600 font-black text-4xl capitalize text-center'>Recupera tu acceso
       </h1>
 
       <form

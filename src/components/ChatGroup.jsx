@@ -54,7 +54,7 @@ const ChatGroup = () => {
       >
         <GroupIcon color='white' />
       </button>
-      <div className='flex flex-col justify-between p-3 w-full bg-gray-100 dark:bg-primary rounded-lg'>
+      <div className='flex flex-col justify-between p-3 w-[345px] bg-gray-100 dark:bg-primary rounded-lg'>
         <div className='flex flex-col gap-3'>
           <div className='h-[420px] flex flex-col gap-2 overflow-auto'>
             {chat.map((msg, index) => (

@@ -59,7 +59,7 @@ const NuevoPassword = () => {
 
   return (
     <>
-      <h1 className='text-blue-600 font-black text-6xl capitalize text-center'>Reestablece tu password
+      <h1 className='text-blue-600 font-black text-4xl capitalize text-center'>Reestablece tu password
       </h1>
 
       {tokenValido && (
