@@ -31,6 +31,7 @@ const ModalEdit = () => {
       const imgFormData = new FormData()
       imgFormData.append('file0', selectedFile)
       const imageResponse = await changeImage(imgFormData)
+      console.log(imageResponse)
     }
 
     const updatedData = await editPerfilFetch(auth._id, formData)

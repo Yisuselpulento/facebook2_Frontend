@@ -1,27 +1,8 @@
 import clienteAxios from '../config/clienteAxios'
 
-/* const fetchComments = async (post) => {
-  try {
-    const token = localStorage.getItem('token')
-    if (!token) return
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    }
-
-    const { data } = await clienteAxios(`comments/${post._id}`, config)
-
-    return (data)
-  } catch (error) {
-    console.log(error.response.data)
-  }
-} */
-
 const handlePostComment = async (id, comentaio) => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {

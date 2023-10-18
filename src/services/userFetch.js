@@ -2,7 +2,7 @@ import clienteAxios from '../config/clienteAxios'
 
 const fetchUsers = async (usuario) => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {

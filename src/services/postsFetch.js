@@ -2,7 +2,7 @@ import clienteAxios from '../config/clienteAxios'
 
 const Postear = async (input) => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {
@@ -20,7 +20,7 @@ const Postear = async (input) => {
 
 const deletePost = async (id) => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {
@@ -38,7 +38,7 @@ const deletePost = async (id) => {
 
 const fetchPost = async () => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {

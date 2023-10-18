@@ -2,7 +2,7 @@ import clienteAxios from '../config/clienteAxios'
 
 const fetchPostMessage = async (message) => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {
@@ -20,7 +20,7 @@ const fetchPostMessage = async (message) => {
 
 const fetchGetMessages = async () => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {

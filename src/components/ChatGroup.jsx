@@ -17,7 +17,6 @@ const ChatGroup = () => {
   useEffect(() => {
     const getMessages = async () => {
       const data = await fetchGetMessages()
-      console.log(data)
       setChat(data)
     }
 
@@ -27,7 +26,7 @@ const ChatGroup = () => {
   const sendMessage = async () => {
     setIsLoading(true)
     const data = await fetchPostMessage(message)
-    console.log(data)
+
     socketInstance.emit('send_message', data)
     setMessage('')
     setIsLoading(false)

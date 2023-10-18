@@ -3,8 +3,6 @@ import useAuth from '../hooks/useAuth'
 
 export const MsjComponent = ({ msg }) => {
   const { auth } = useAuth()
-  console.log(auth._id)
-  console.log(msg.user._id)
   const isSentByMe = auth?._id === msg.user?._id
 
   return (
