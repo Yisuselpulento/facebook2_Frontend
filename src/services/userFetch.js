@@ -22,7 +22,7 @@ const fetchUsers = async (usuario) => {
 
 const fetchUserbyId = async (id) => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
       headers: {
@@ -40,7 +40,7 @@ const fetchUserbyId = async (id) => {
 
 const fetchUserbyName = async (name) => {
   try {
-    const token = localStorage.getItem('token')
+    const token = window.localStorage.getItem('token')
     if (!token) {
       console.error('Token not found')
       return null
