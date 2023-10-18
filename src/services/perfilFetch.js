@@ -1,7 +1,7 @@
 import clienteAxios from '../config/clienteAxios'
 
 const editPerfilFetch = async (id, form) => {
-  /*  try {
+  try {
     const token = window.localStorage.getItem('token')
     if (!token) return
     const config = {
@@ -15,7 +15,7 @@ const editPerfilFetch = async (id, form) => {
     return updateDAta.data
   } catch (error) {
     console.log(error)
-  } */
+  }
 }
 
 const changeImage = async (data) => {

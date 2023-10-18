@@ -34,9 +34,9 @@ const ModalEdit = () => {
       console.log(imageResponse)
     }
 
-    /*   const updatedData = await editPerfilFetch(auth._id, formData)
+    const updatedData = await editPerfilFetch(auth._id, formData)
 
-    updateUser(updatedData) */
+    updateUser(updatedData)
 
     setModalEdit(!modalEdit)
   }
