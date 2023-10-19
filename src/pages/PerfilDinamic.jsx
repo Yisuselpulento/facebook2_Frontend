@@ -23,7 +23,7 @@ export const PerfilDinamic = () => {
     }
 
     getUser()
-  }, [])
+  }, [userId])
 
   if (cargando) return 'cargando'
   return (
@@ -39,7 +39,7 @@ export const PerfilDinamic = () => {
           ))
           : <div className='flex items-center justify-center'>
             <Spinner />
-          </div>}
+            </div>}
       </div>
     </div>
   )
