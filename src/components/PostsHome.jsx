@@ -5,16 +5,42 @@ import CardComments from './CardComments'
 import { Link } from 'react-router-dom'
 import { HeartDislike, HeartLike } from '../assets/icons/iconos'
 import usePosts from '../hooks/usePosts'
+import { likePostFetch } from '../services/postsFetch'
 
 export const PostsHome = ({ post }) => {
+  const { author, content, _id, comments, likes } = post
+
   const { auth } = useAuth()
   const { handleDeletePost, cargando, newComment } = usePosts()
   const [comentario, setComentario] = useState('')
   const [mostrarLikes, setMostrarLikes] = useState(false)
-
-  const { author, content, _id, comments } = post
+  // likes
+  const [hasLiked, setHasLiked] = useState(likes.some(like => like.userId === auth._id))
+  const [likesCount, setLikesCount] = useState(likes.length)
+  const [likesUsers, setLikesUsers] = useState(likes)
+  // likes
 
   const shouldShowDeleteButton = author._id === auth._id
+
+  const handleLike = async () => {
+    // Cambio optimista: Suponemos que la operación será exitosa
+    setHasLiked(prevState => !prevState)
+    setLikesCount(prevState => hasLiked ? prevState - 1 : prevState + 1)
+
+    try {
+      const data = await likePostFetch(_id)
+      // Confirma el cambio en la UI basándote en la respuesta real del servidor
+      setHasLiked(data.hasLiked)
+      setLikesCount(data.likesCount)
+      setLikesUsers(data.likesUsers)
+    } catch (error) {
+      console.error("Error al dar/quitar 'like':", error)
+
+      // Si hay un error, revierte los cambios optimistas
+      setHasLiked(prevState => !prevState)
+      setLikesCount(prevState => hasLiked ? prevState + 1 : prevState - 1)
+    }
+  }
 
   return (
 
@@ -50,16 +76,11 @@ export const PostsHome = ({ post }) => {
         {content}
       </div>
 
-      {/*   <div className='flex gap-2'>
-        {cargandoHeart
-          ? (
-            <p>cargando...</p>
-            )
-          : (
-            <button onClick={() => handleLike(_id)}>
-              {hasLiked ? <HeartLike color='red' /> : <HeartDislike />}
-            </button>
-            )}
+      <div className='flex gap-2'>
+
+        <button onClick={() => handleLike(_id)}>
+          {hasLiked ? <HeartLike color='red' /> : <HeartDislike />}
+        </button>
 
         <div
           onMouseEnter={() => setMostrarLikes(true)}
@@ -68,7 +89,7 @@ export const PostsHome = ({ post }) => {
           <p className='cursor pointer outline-2'>{likesCount}</p>
           {mostrarLikes && (
             <div className='absolute z-10 mt-6 p-4 bg-black rounded shadow-xl transition-opacity opacity-100'>
-              {likes?.map((like, index) => (
+              {likesUsers?.map((like, index) => (
                 <div key={index} className='flex items-center gap-2'>
                   <img
                     width={20}
@@ -83,7 +104,7 @@ export const PostsHome = ({ post }) => {
             </div>
           )}
         </div>
-      </div> */}
+      </div>
 
       <div className='md:flex gap-1 items-center'>
 
