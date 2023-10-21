@@ -12,8 +12,6 @@ const ModalEdit = () => {
     country: auth.country || ''
   })
 
-  console.log(auth)
-
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData(prevState => ({
@@ -32,8 +30,7 @@ const ModalEdit = () => {
     if (selectedFile) {
       const imgFormData = new FormData()
       imgFormData.append('file0', selectedFile)
-      const imageResponse = await changeImage(imgFormData)
-      console.log(imageResponse)
+      await changeImage(imgFormData)
     }
 
     const updatedData = await editPerfilFetch(auth._id, formData)

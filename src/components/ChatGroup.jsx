@@ -24,6 +24,8 @@ const ChatGroup = () => {
   }, [])
 
   const sendMessage = async () => {
+    if (!message.trim()) return
+
     setIsLoading(true)
     const data = await fetchPostMessage(message)
 
@@ -47,16 +49,16 @@ const ChatGroup = () => {
   return (
 
     <div className='flex gap-2 '>
-      {chatGroup ? <OnlineGroup /> : <p>si</p>}
+      {chatGroup && <OnlineGroup />}
       <button
         onClick={() => setchatGroup(!chatGroup)}
         className='fixed top-2 left-2 w-10 h-10 bg-blue-700 rounded-full z-10 flex items-center justify-center'
       >
         <GroupIcon color='white' />
       </button>
-      <div className='flex flex-col justify-between p-3 w-[345px] bg-gray-100 dark:bg-primary rounded-lg'>
+      <div className='flex flex-col justify-between w-full h-screen bg-gray-100 dark:bg-primary rounded-lg'>
         <div className='flex flex-col gap-3'>
-          <div className='h-[420px] flex flex-col gap-2 overflow-auto'>
+          <div className='h-[450px] flex flex-col gap-2 overflow-auto'>
             {chat.map((msg, index) => (
               <MsjComponent msg={msg} key={index} isLoading={isLoading} />
             ))}
@@ -64,7 +66,7 @@ const ChatGroup = () => {
           <div className='flex bg-gray-300 p-1 rounded-full gap-2 w-full items-center md:justify-center justify-start'>
             <button
               onClick={sendMessage}
-              className='bg-blue-700 rounded-full p-1'
+              className='bg-blue-700 rounded-full p-1 hover:bg-blue-800'
             >
               <SendMsj color='white' />
             </button>
